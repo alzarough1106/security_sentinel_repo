@@ -1,138 +1,33 @@
-.. image:: static/description/banner.png
-   :alt: Direct Document Scanner — Odoo 19
-   :width: 100%
+# 🛡️ Super Session Management & Audit Trail — Odoo 18 CE!
 
-===========================================
-Direct Document Scanner for Odoo 19 CE
-===========================================
+Track every login session and audit every record change across your entire
+Odoo database — with a live, color-coded dashboard.
 
-**Scan physical documents directly into Odoo using your locally connected
-scanner hardware — no cloud, no middleware, no extra subscriptions.**
+## Features
 
-Works with HP, Canon, Epson, Brother, Xerox, Fujitsu and more.
-Supports TWAIN & WIA (Windows), SANE (Linux), and eSCL (macOS).
-Build multi-page PDFs directly within Odoo. 100% local processing.
+- **Session Tracking**: IP address, browser, browser version, OS, and device
+  type captured automatically on every login.
+- **Kill Switch**: Instantly terminate any active session — the affected
+  user is force-logged-out on their next request (or immediately, if it's
+  their own current session).
+- **New Device Alerts**: Automatic email notification when a user logs in
+  from an unrecognized device/browser/IP combination.
+- **Idle Session Auto-Kill**: Configurable scheduled action to automatically
+  terminate sessions inactive beyond a threshold.
+- **Full Audit Trail**: Create / Update / Delete operations are logged
+  automatically across business models, linked to the exact session they
+  occurred in.
+- **Module Install/Uninstall Tracking**: Know who installed or removed any
+  app, and when.
+- **Audit Rules**: Fine-tune which models are tracked (enabled by default
+  for business models; technical `ir.*` models are opt-in).
+- **Interactive Dashboard**: KPI cards, trend lines, doughnut/bar charts —
+  every element is clickable and drills straight into the filtered list.
+- **Advanced Search**: Pre-built filters and group-by options for both
+  Sessions and Audit Logs (by user, state, model, action, date granularity).
 
-----
+## Storage & Performance Notes
 
-🎬 Demo Videos
-==============
+This module tracks Create/Update/Delete operations across business models by default. Actual database growth depends heavily on usage volume and which models are tracked — typical ranges are 100MB-1.5GB/year for small-to-medium teams (10-50 users), up to 10-15GB/year for larger deployments with heavy inventory/manufacturing activity. A configurable retention policy (default 365 days) keeps growth bounded. 
 
-- `Scanner Widget Overview <https://youtu.be/ICjm4qbfUbA>`_
-- `ADF & PDF Workflow <https://youtu.be/4GZEN8-Rsfo>`_
-
-----
-
-✨ Key Features
-==============
-
-🔒 100% Local Processing
-  Zero cloud dependency. All image processing happens client-side.
-  Your documents never leave your network.
-
-🦉 Native OWL 2 Widget
-  Drop-in integration for Odoo 19 forms. No configuration needed.
-
-✂️ Interactive Crop Editor
-  8 resize handles, draggable crop box, live pixel readout for
-  precise document cropping before saving.
-
-📚 ADF Bulk-Feed Scanning
-  Scan entire document stacks in one click using your scanner's
-  automatic document feeder.
-
-📑 Multi-Page PDF Assembly
-  Reorder pages, re-crop, set custom filename, saved directly
-  as ``ir.attachment`` inside any Odoo record.
-
-🌐 USB · Wi-Fi · Ethernet
-  Network scanners are discovered automatically. Works with
-  all major connection types.
-
-🔌 WebSocket Bridge
-  Lightweight local Python bridge connects your scanner hardware
-  to the Odoo web interface in real time.
-
-----
-
-🖥️ Supported Platforms
-======================
-
-+------------------+----------------------------+
-| Platform         | Protocol                   |
-+==================+============================+
-| Windows 10/11    | TWAIN · WIA                |
-+------------------+----------------------------+
-| Linux            | SANE                       |
-+------------------+----------------------------+
-| macOS            | eSCL / ImageCaptureCore    |
-+------------------+----------------------------+
-
-----
-
-📸 Screenshots
-==============
-
-.. image:: static/description/screenshot_01.png
-   :alt: Scanner Widget embedded in Odoo form
-   :width: 100%
-
-.. image:: static/description/screenshot_02.png
-   :alt: Crop Editor with resize handles
-   :width: 100%
-
-.. image:: static/description/screenshot_03.png
-   :alt: ADF Multi-page scanning
-   :width: 100%
-
-.. image:: static/description/screenshot_04.png
-   :alt: PDF Assembly panel
-   :width: 100%
-
-.. image:: static/description/screenshot_05.png
-   :alt: Scanner discovery — USB and Network
-   :width: 100%
-
-.. image:: static/description/screenshot_06.png
-   :alt: Saved attachment inside Odoo record
-   :width: 100%
-
-----
-
-⚙️ Installation
-===============
-
-1. Purchase and download the module from the
-   `Odoo App Store <https://apps.odoo.com>`_.
-2. Download the scanner bridge binary for your platform from the
-   `Releases Page <https://github.com/alzarough1106/odoo19-binaries/releases>`_.
-3. Run the bridge binary on the machine connected to your scanner.
-4. Install the module in Odoo via **Apps → Upload Module**.
-5. Open any form view — the scanner widget will appear automatically.
-
-----
-
-📋 Requirements
-===============
-
-- Odoo 19.0 Community or Enterprise
-- Python 3.10+
-- A TWAIN / WIA / SANE / eSCL compatible scanner
-
-----
-
-📄 License
-==========
-
-This module is licensed under the
-`Odoo Proprietary License v1.0 (OPL-1) <https://www.odoo.com/documentation/17.0/legal/licenses.html>`_.
-
-© 2025 Al Morabet Technology. All rights reserved.
-
-----
-
-📬 Support
-==========
-
-For issues, questions, or feature requests please contact us via the
-Odoo App Store support channel or open a ticket on GitHub.
+For high-volume deployments, we recommend disabling audit tracking on line-item models (stock moves, order lines, journal items) via Audit Rules, which typically reduces log volume by 60-80% with minimal loss of audit value, since parent document state changes remain fully tracked.
