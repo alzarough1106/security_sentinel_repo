@@ -3,11 +3,11 @@
     "version": "18.0.1.0.0",
     "category": "Extra Tools",
     "summary": "Track user sessions, kill suspicious sessions, and audit every "
-                "create/read/write/delete + module install/uninstall operation",
+               "create/read/write/delete + module install/uninstall operation",
     "author": "alzarough",
     'license': 'OPL-1',
     'price': 50.0,
-    'currency': 'USD',    "depends": ["base", "mail", "web"],
+    'currency': 'USD', "depends": ["base", "mail", "web"],
     "data": [
         "security/security.xml",
         "security/ir.model.access.csv",
@@ -22,6 +22,16 @@
         "views/dashboard_views.xml",
         "views/res_config_settings_views.xml",
         "views/menu_views.xml",
+    ],
+    'images': [
+        'static/description/banner.png',
+        'static/description/icon.png',
+        'static/description/screenshot_01.png',
+        'static/description/screenshot_02.png',
+        'static/description/screenshot_03.png',
+        'static/description/screenshot_04.png',
+        'static/description/screenshot_05.png',
+        'static/description/screenshot_06.png',
     ],
     "assets": {
         "web.assets_backend": [
