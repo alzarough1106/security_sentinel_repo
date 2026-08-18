@@ -4,9 +4,10 @@
     "category": "Extra Tools",
     "summary": "Track user sessions, kill suspicious sessions, and audit every "
                 "create/read/write/delete + module install/uninstall operation",
-    "author": "Your Company",
-    "license": "LGPL-3",
-    "depends": ["base", "mail", "web"],
+    "author": "alzarough",
+    'license': 'OPL-1',
+    'price': 50.0,
+    'currency': 'USD',    "depends": ["base", "mail", "web"],
     "data": [
         "security/security.xml",
         "security/ir.model.access.csv",
