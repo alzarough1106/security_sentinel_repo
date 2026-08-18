@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+  <t t-name="super_session_audit.Dashboard">
+        <div class="o_audit_dashboard p-4 h-100 overflow-auto o_scrollable">
+      <div t-if="state.loading" class="text-center p-5">
+        <i class="fa fa-spinner fa-spin fa-2x"/>
+      </div>
+
+            <div t-if="!state.loading">
+        <!-- KPI CARDS — all clickable now -->
+                <div class="row g-3 mb-3">
+          <div class="col-md-3">
+            <div class="o_kpi_card o_kpi_clickable bg-success-subtle border-start border-success border-4"
+                 t-on-click="openActiveSessions">
+              <div class="o_kpi_label">Active Sessions</div>
+                <div class="o_kpi_value text-success" t-esc="state.data.kpis.active_sessions"/>
+            </div>
+          </div>
+                    <div class="col-md-3">
+            <div class="o_kpi_card o_kpi_clickable bg-danger-subtle border-start border-danger border-4"
+                 t-on-click="openKilledSessions">
+              <div class="o_kpi_label">Killed Sessions</div>
+                <div class="o_kpi_value text-danger" t-esc="state.data.kpis.killed_sessions"/>
+            </div>
+          </div>
+                    <div class="col-md-3">
+            <div class="o_kpi_card o_kpi_clickable bg-warning-subtle border-start border-warning border-4"
+                 t-on-click="openNewDevicesToday">
+              <div class="o_kpi_label">New Devices Today</div>
+                <div class="o_kpi_value text-warning" t-esc="state.data.kpis.new_devices_today"/>
+            </div>
+          </div>
+                    <div class="col-md-3">
+            <div class="o_kpi_card o_kpi_clickable bg-info-subtle border-start border-info border-4"
+                 t-on-click="openLogsToday">
+              <div class="o_kpi_label">Audit Logs Today</div>
+                <div class="o_kpi_value text-info" t-esc="state.data.kpis.logs_today"/>
+            </div>
+          </div>
+        </div>
+
+                <div class="row g-3 mb-3">
+          <div class="col-md-4">
+            <div class="o_kpi_card o_kpi_clickable bg-primary-subtle border-start border-primary border-4"
+                 t-on-click="openCreates7d">
+              <div class="o_kpi_label">Creates (7d)</div>
+                <div class="o_kpi_value text-primary" t-esc="state.data.kpis.creates_7d"/>
+            </div>
+          </div>
+                    <div class="col-md-4">
+            <div class="o_kpi_card o_kpi_clickable bg-secondary-subtle border-start border-secondary border-4"
+                 t-on-click="openWrites7d">
+              <div class="o_kpi_label">Updates (7d)</div>
+                <div class="o_kpi_value text-secondary" t-esc="state.data.kpis.writes_7d"/>
+            </div>
+          </div>
+                    <div class="col-md-4">
+            <div class="o_kpi_card o_kpi_clickable bg-danger-subtle border-start border-danger border-4"
+                 t-on-click="openDeletes7d">
+              <div class="o_kpi_label">Deletes (7d)</div>
+                <div class="o_kpi_value text-danger" t-esc="state.data.kpis.deletes_7d"/>
+            </div>
+          </div>
+        </div>
+
+                <!-- CHARTS ROW 1 -->
+                <div class="row g-3 mb-3">
+          <div class="col-md-8">
+            <div class="o_chart_card">
+              <h6>Activity Trend (14 days) <small class="text-muted">click a point to drill in</small></h6>
+                <div class="o_chart_wrap"><canvas t-ref="trendChart"/></div>
+            </div>
+          </div>
+                    <div class="col-md-4">
+            <div class="o_chart_card">
+              <h6>Sessions by State <small class="text-muted">click a slice</small></h6>
+                <div class="o_chart_wrap"><canvas t-ref="stateChart"/></div>
+            </div>
+          </div>
+        </div>
+
+                <!-- CHARTS ROW 2 -->
+                <div class="row g-3 mb-3">
+          <div class="col-md-4">
+            <div class="o_chart_card">
+              <h6>Actions by Type (7d) <small class="text-muted">click a slice</small></h6>
+                <div class="o_chart_wrap"><canvas t-ref="actionsChart"/></div>
+            </div>
+          </div>
+                    <div class="col-md-4">
+            <div class="o_chart_card">
+              <h6>Top 5 Active Users (30d) <small class="text-muted">click a bar</small></h6>
+                <div class="o_chart_wrap"><canvas t-ref="usersChart"/></div>
+            </div>
+          </div>
+                    <div class="col-md-4">
+            <div class="o_chart_card">
+              <h6>Top 5 Touched Models (30d) <small class="text-muted">click a bar</small></h6>
+                <div class="o_chart_wrap"><canvas t-ref="modelsChart"/></div>
+            </div>
+          </div>
+        </div>
+
+                <!-- LISTS -->
+                <div class="row g-3">
+          <div class="col-md-6">
+            <div class="o_list_card">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h6 class="mb-0">Active Sessions</h6>
+                  <button class="btn btn-sm btn-link" t-on-click="openSessions">View All</button>
+              </div>
+                <table class="table table-sm">
+                <thead><tr><th>User</th><th>IP</th><th>Browser/OS</th><th>Last Activity</th></tr></thead>
+                    <tbody>
+                  <tr t-foreach="state.data.active_sessions" t-as="s" t-key="s.id"
+                      t-on-click="() => this.openSessionRecord(s.id)" class="o_clickable_row">
+                    <td>
+                      <span t-esc="s.user"/>
+                        <span t-if="s.is_new_device" class="badge bg-warning ms-1">New Device</span>
+                    </td>
+                      <td t-esc="s.ip"/>
+                      <td><t t-esc="s.browser"/>
+                          /
+                          <t t-esc="s.os"/></td>
+                      <td t-esc="s.last_activity"/>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+                    <div class="col-md-6">
+            <div class="o_list_card">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h6 class="mb-0">Recent Activity</h6>
+                  <button class="btn btn-sm btn-link" t-on-click="openAuditLogs">View All</button>
+              </div>
+                <table class="table table-sm">
+                <thead><tr><th>User</th><th>Model</th><th>Action</th><th>Date</th></tr></thead>
+                    <tbody>
+                  <tr t-foreach="state.data.recent_logs" t-as="l" t-key="l.id"
+                      t-on-click="() => this.openAuditLogRecord(l.id)" class="o_clickable_row">
+                    <td t-esc="l.user"/>
+                      <td t-esc="l.model"/>
+                      <td>
+                      <span t-attf-class="badge bg-{{ l.method === 'create' ? 'success' : l.method === 'unlink' ? 'danger' : l.method === 'write' ? 'info' : 'secondary' }}"
+                            t-esc="l.method"/>
+                    </td>
+                      <td t-esc="l.date"/>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </t>
+</templates>

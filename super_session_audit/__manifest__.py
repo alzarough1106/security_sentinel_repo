@@ -1,0 +1,35 @@
+{
+    "name": "Super Session Management & Audit Trail",
+    "version": "18.0.1.0.0",
+    "category": "Extra Tools",
+    "summary": "Track user sessions, kill suspicious sessions, and audit every "
+                "create/read/write/delete + module install/uninstall operation",
+    "author": "Your Company",
+    "license": "LGPL-3",
+    "depends": ["base", "mail", "web"],
+    "data": [
+        "security/security.xml",
+        "security/ir.model.access.csv",
+        "data/mail_template_data.xml",
+        "data/ir_cron_data.xml",
+        "views/user_session_search.xml",
+        "views/user_session_views.xml",
+        "views/audit_log_search.xml",
+        "views/audit_log_views.xml",
+        "views/audit_rule_views.xml",
+        "data/audit_rule_data.xml",
+        "views/dashboard_views.xml",
+        "views/res_config_settings_views.xml",
+        "views/menu_views.xml",
+    ],
+    "assets": {
+        "web.assets_backend": [
+            "web/static/lib/Chart/Chart.js",
+            "super_session_audit/static/src/js/audit_dashboard.js",
+            "super_session_audit/static/src/xml/audit_dashboard.xml",
+            "super_session_audit/static/src/scss/audit_dashboard.scss",
+        ],
+    },
+    "installable": True,
+    "application": True,
+}
