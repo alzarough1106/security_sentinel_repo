@@ -1,6 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_session_user,session.user,model_res_users_session,group_session_audit_user,1,1,0,0
-access_session_manager,session.manager,model_res_users_session,group_session_audit_manager,1,1,1,1
-access_audit_log_user,audit.log.user,model_audit_log,group_session_audit_user,1,0,0,0
-access_audit_log_manager,audit.log.manager,model_audit_log,group_session_audit_manager,1,1,1,1
-access_audit_rule_manager,audit.rule.manager,model_audit_rule,group_session_audit_manager,1,1,1,1
