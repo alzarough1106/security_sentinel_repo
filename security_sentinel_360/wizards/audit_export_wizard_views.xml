@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_audit_export_wizard_form" model="ir.ui.view">
+        <field name="name">audit.export.wizard.form</field>
+        <field name="model">audit.export.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Export Audit Logs">
+                <group invisible="state == 'done'">
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="min_risk_score"/>
+                    </group>
+                    <group>
+                        <field name="user_ids" widget="many2many_tags"/>
+                        <field name="event_types" placeholder="login,unlink,export"/>
+                    </group>
+                </group>
+                <group invisible="state == 'draft'">
+                    <field name="file_data" filename="file_name" readonly="1"/>
+                    <field name="file_name" invisible="1"/>
+                </group>
+                <footer>
+                    <button name="action_export" string="Export to CSV" type="object"
+                            class="btn-primary" invisible="state == 'done'"/>
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+                <field name="state" invisible="1"/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_audit_export_wizard" model="ir.actions.act_window">
+        <field name="name">Export Audit Logs</field>
+        <field name="res_model">audit.export.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

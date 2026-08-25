@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="security_sentinel_360.AccessMatrix">
+        <div class="o_access_matrix p-3">
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+                <h2 class="mb-0">
+                    <i class="fa fa-th"/>
+                    User Access Matrix
+                </h2>
+                <div>
+                    <button class="btn btn-sm btn-info me-2" t-on-click="openCompareModal">
+                        <i class="fa fa-exchange"/>
+                        Compare Users
+                    </button>
+                    <button class="btn btn-sm btn-info me-2" t-on-click="openFindModal">
+                        <i class="fa fa-search"/>
+                        Reverse Search
+                    </button>
+<!--                    <button class="btn btn-sm btn-secondary me-2" t-on-click="openSnapshots">-->
+<!--                        <i class="fa fa-camera"/>-->
+<!--                        Reviews-->
+<!--                    </button>-->
+                    <button class="btn btn-sm btn-secondary me-2" t-on-click="refresh">
+                        <i class="fa fa-refresh"/>
+                        Refresh
+                    </button>
+                    <button class="btn btn-sm btn-primary" t-on-click="openExport">
+                        <i class="fa fa-download"/>
+                        Export CSV
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="card mb-3">
+                <div class="card-body p-3">
+                    <div class="row g-2 align-items-end">
+                        <div class="col-md-3">
+                            <label class="form-label small mb-1">Filter by Group</label>
+                            <select class="form-select form-select-sm"
+                                    t-model="state.filters.group_id"
+                                    t-on-change="onFilterChange">
+                                <option value="">All groups</option>
+                                <t t-foreach="state.filterOptions.groups" t-as="g" t-key="g.id">
+                                    <option t-att-value="g.id"><t t-esc="g.name"/></option>
+                                </t>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small mb-1">Filter by Company</label>
+                            <select class="form-select form-select-sm"
+                                    t-model="state.filters.company_id"
+                                    t-on-change="onFilterChange">
+                                <option value="">All companies</option>
+                                <t t-foreach="state.filterOptions.companies" t-as="c" t-key="c.id">
+                                    <option t-att-value="c.id"><t t-esc="c.name"/></option>
+                                </t>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small mb-1">Search Models</label>
+                            <input type="text" class="form-control form-control-sm"
+                                   placeholder="e.g., partner, account..."
+                                   t-on-input="onSearchInput"/>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-check form-switch">
+                                <input type="checkbox" class="form-check-input"
+                                       t-model="state.filters.sensitive_only"
+                                       t-on-change="onFilterChange"/>
+                                <label class="form-check-label small">Sensitive only</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input type="checkbox" class="form-check-input"
+                                       t-model="state.filters.show_share_users"
+                                       t-on-change="onFilterChange"/>
+                                <label class="form-check-label small">Include portal users</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Bar -->
+            <div t-if="!state.loading" class="d-flex gap-3 mb-3 flex-wrap">
+                <span class="badge bg-primary p-2">
+                    <i class="fa fa-users"/>
+                    <t t-esc="state.data.stats.user_count"/>
+                    users
+                </span>
+                <span class="badge bg-info p-2">
+                    <i class="fa fa-database"/>
+                    <t t-esc="state.data.stats.model_count"/>
+                    models
+                </span>
+                <span class="badge bg-warning p-2">
+                    <i class="fa fa-star"/>
+                    <t t-esc="state.data.stats.admin_count"/>
+                    admin(s)
+                </span>
+            </div>
+
+            <!-- Legend -->
+            <div class="d-flex gap-2 mb-3 flex-wrap">
+                <span class="legend-item matrix-cell-admin">★ Admin (full)</span>
+                <span class="legend-item matrix-cell-full">RWCD Full</span>
+                <span class="legend-item matrix-cell-write">RW Write</span>
+                <span class="legend-item matrix-cell-read">R Read</span>
+                <span class="legend-item matrix-cell-none">— None</span>
+            </div>
+
+            <!-- Loading -->
+            <div t-if="state.loading" class="text-center p-5">
+                <i class="fa fa-spinner fa-spin fa-3x"/>
+                <p class="mt-3">Computing access matrix...</p>
+            </div>
+
+            <!-- Matrix Table -->
+            <div t-else="" class="matrix-scroll-container">
+                <table class="matrix-table">
+                    <thead>
+                        <tr>
+                            <th class="matrix-corner">User \\ Model</th>
+                            <t t-foreach="filteredModels" t-as="m" t-key="m.id">
+                                <th class="matrix-model-header"
+                                    t-att-class="m.sensitive ? 'sensitive-model' : ''"
+                                    t-att-title="m.model"> <!-- Keeps technical name visible on mouse hover -->
+                                    <div class="model-header-content">
+                                        <span class="model-name"><t t-esc="m.name || m.model"/></span>
+                                        <span t-if="m.sensitive" class="sensitive-marker">🔒</span>
+                                    </div>
+                                </th>
+                            </t>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="state.data.users" t-as="u" t-key="u.id">
+                            <tr>
+                                <td class="matrix-user-cell" t-att-class="u.is_admin ? 'admin-user' : ''">
+                                    <strong><t t-esc="u.login"/></strong>
+                                    <span t-if="u.is_admin" class="badge bg-warning text-dark ms-1">ADMIN</span>
+                                    <div class="user-name"><t t-esc="u.name"/></div>
+                                </td>
+                                <t t-foreach="filteredModels" t-as="m" t-key="m.id">
+                                    <td class="matrix-cell"
+                                        t-att-class="getCellClass(state.data.matrix[u.id]?.[m.id])"
+                                        t-att-title="getCellTooltip(u, m, state.data.matrix[u.id]?.[m.id])"
+                                        t-on-click="() => this.openExplainModal(u.id, m.id)">
+                                        <t t-esc="getCellLabel(state.data.matrix[u.id]?.[m.id])"/>
+                                    </td>
+                                </t>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- EXPLAIN MODAL -->
+            <!-- ============================================ -->
+            <div t-if="state.explainModal.visible" class="modal-backdrop-custom" t-on-click="closeExplainModal">
+                <div class="modal-content-custom" t-on-click.stop="() => {}">
+                    <div class="modal-header">
+                        <h5>🔍 Access Explanation</h5>
+                        <button class="btn-close" t-on-click="closeExplainModal"/>
+                    </div>
+                    <div class="modal-body">
+                        <div t-if="state.explainModal.loading" class="text-center p-3">
+                            <i class="fa fa-spinner fa-spin fa-2x"/>
+                        </div>
+                        <div t-elif="state.explainModal.data and !state.explainModal.data.error">
+                            <div class="alert alert-info mb-3">
+                                <strong>User:</strong>
+                                <t t-esc="state.explainModal.data.user.login"/>
+                                (<t t-esc="state.explainModal.data.user.name"/>)
+                                <br/>
+                                <strong>Model:</strong>
+                                <t t-esc="state.explainModal.data.model.model"/>
+                                (<t t-esc="state.explainModal.data.model.name"/>)
+                            </div>
+
+                            <div t-if="state.explainModal.data.is_admin" class="alert alert-warning">
+                                ⭐ This user is an <strong>Administrator</strong> — has full access to all models.
+                            </div>
+
+                            <h6>User's Groups</h6>
+                            <div class="mb-3">
+                                <t t-foreach="state.explainModal.data.user_groups" t-as="g" t-key="g_index">
+                                    <span class="badge bg-secondary me-1 mb-1"><t t-esc="g"/></span>
+                                </t>
+                            </div>
+
+                            <h6>✅ Applicable Access Rules</h6>
+                            <table class="table table-sm" t-if="state.explainModal.data.applicable_rules.length">
+                                <thead><tr><th>Rule</th><th>Group</th><th>R</th><th>W</th><th>C</th><th>D</th></tr></thead>
+                                <tbody>
+                                    <t t-foreach="state.explainModal.data.applicable_rules" t-as="r" t-key="r_index">
+                                        <tr>
+                                            <td><t t-esc="r.rule_name"/></td>
+                                            <td><small><t t-esc="r.group"/></small></td>
+                                            <td><t t-if="r.read">✓</t></td>
+                                            <td><t t-if="r.write">✓</t></td>
+                                            <td><t t-if="r.create">✓</t></td>
+                                            <td><t t-if="r.unlink">✓</t></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <p t-else="" class="text-muted">No applicable ACL rules grant access.</p>
+
+                            <h6>📋 Record Rules (ir.rule)</h6>
+                            <table class="table table-sm" t-if="state.explainModal.data.record_rules.length">
+                                <thead><tr><th>Name</th><th>Domain</th><th>Global</th></tr></thead>
+                                <tbody>
+                                    <t t-foreach="state.explainModal.data.record_rules" t-as="rr" t-key="rr_index">
+                                        <tr>
+                                            <td><t t-esc="rr.name"/></td>
+                                            <td><code><t t-esc="rr.domain"/></code></td>
+                                            <td><t t-if="rr.global">✓ Global</t></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <p t-else="" class="text-muted">No record-level rules apply.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- COMPARE MODAL -->
+            <!-- ============================================ -->
+            <div t-if="state.compareModal.visible" class="modal-backdrop-custom" t-on-click="closeCompareModal">
+                <div class="modal-content-custom modal-large" t-on-click.stop="">
+                    <div class="modal-header">
+                        <h5>⚖️ Compare User Permissions</h5>
+                        <button class="btn-close" t-on-click="closeCompareModal"/>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mb-3">
+                            <div class="col-md-5">
+                                <label>User A</label>
+                                <select class="form-select" t-model="state.compareModal.userA">
+                                    <option value="">Select user...</option>
+                                    <t t-foreach="state.data.users" t-as="u" t-key="u.id">
+                                        <option t-att-value="u.id"><t t-esc="u.login"/></option>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <label>User B</label>
+                                <select class="form-select" t-model="state.compareModal.userB">
+                                    <option value="">Select user...</option>
+                                    <t t-foreach="state.data.users" t-as="u" t-key="u.id">
+                                        <option t-att-value="u.id"><t t-esc="u.login"/></option>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end">
+                                <button class="btn btn-primary w-100" t-on-click="runCompare">
+                                    Compare
+                                </button>
+                            </div>
+                        </div>
+
+                        <div t-if="state.compareModal.loading" class="text-center p-3">
+                            <i class="fa fa-spinner fa-spin fa-2x"/>
+                        </div>
+                        <div t-elif="state.compareModal.data">
+                            <div class="alert alert-info">
+                                <t t-esc="state.compareModal.data.identical_count"/>
+                                models identical,
+                                <strong><t t-esc="state.compareModal.data.differences.length"/></strong>
+                                differences found.
+                            </div>
+                            <div t-if="state.compareModal.data.differences.length" class="compare-results">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Model</th>
+                                            <th t-att-colspan="4" class="text-center">
+                                                <t t-esc="state.compareModal.data.user_a.login"/>
+                                            </th>
+                                            <th t-att-colspan="4" class="text-center">
+                                                <t t-esc="state.compareModal.data.user_b.login"/>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th></th>
+                                            <th>R</th>
+                                            <th>W</th>
+                                            <th>C</th>
+                                            <th>D</th>
+                                            <th>R</th>
+                                            <th>W</th>
+                                            <th>C</th>
+                                            <th>D</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="state.compareModal.data.differences" t-as="d" t-key="d_index">
+                                            <tr>
+                                                <td><code><t t-esc="d.model"/></code></td>
+                                                <td t-att-class="d.a.read ? 'bg-success-subtle' : ''"><t t-if="d.a.read">✓</t></td>
+                                                <td t-att-class="d.a.write ? 'bg-success-subtle' : ''"><t t-if="d.a.write">✓</t></td>
+                                                <td t-att-class="d.a.create ? 'bg-success-subtle' : ''"><t t-if="d.a.create">✓</t></td>
+                                                <td t-att-class="d.a.unlink ? 'bg-success-subtle' : ''"><t t-if="d.a.unlink">✓</t></td>
+                                                <td t-att-class="d.b.read ? 'bg-success-subtle' : ''"><t t-if="d.b.read">✓</t></td>
+                                                <td t-att-class="d.b.write ? 'bg-success-subtle' : ''"><t t-if="d.b.write">✓</t></td>
+                                                <td t-att-class="d.b.create ? 'bg-success-subtle' : ''"><t t-if="d.b.create">✓</t></td>
+                                                <td t-att-class="d.b.unlink ? 'bg-success-subtle' : ''"><t t-if="d.b.unlink">✓</t></td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- REVERSE SEARCH MODAL -->
+            <!-- ============================================ -->
+            <div t-if="state.findModal.visible" class="modal-backdrop-custom" t-on-click="closeFindModal">
+                <div class="modal-content-custom" t-on-click.stop="">
+                    <div class="modal-header">
+                        <h5>🔎 Reverse Search: Who Can...?</h5>
+                        <button class="btn-close" t-on-click="closeFindModal"/>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label>Model (technical name)</label>
+                                <input type="text" class="form-control"
+                                       t-model="state.findModal.modelName"
+                                       placeholder="e.g., res.partner, account.move"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Permission</label>
+                                <select class="form-select" t-model="state.findModal.permission">
+                                    <option value="read">Read</option>
+                                    <option value="write">Write</option>
+                                    <option value="create">Create</option>
+                                    <option value="unlink">Delete</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end">
+                                <button class="btn btn-primary w-100" t-on-click="runFind">
+                                    Find
+                                </button>
+                            </div>
+                        </div>
+
+                        <div t-if="state.findModal.loading" class="text-center p-3">
+                            <i class="fa fa-spinner fa-spin fa-2x"/>
+                        </div>
+                        <div t-elif="state.findModal.data">
+                            <div class="alert alert-success">
+                                Found <strong><t t-esc="state.findModal.data.length"/></strong>
+                                user(s) with
+                                <strong><t t-esc="state.findModal.permission"/></strong>
+                                permission on
+                                <code><t t-esc="state.findModal.modelName"/></code>
+                            </div>
+                            <table class="table table-sm">
+                                <thead><tr><th>Login</th><th>Name</th><th>Groups</th></tr></thead>
+                                <tbody>
+                                    <t t-foreach="state.findModal.data" t-as="u" t-key="u.id">
+                                        <tr>
+                                            <td><strong><t t-esc="u.login"/></strong></td>
+                                            <td><t t-esc="u.name"/></td>
+                                            <td>
+                                                <t t-foreach="u.groups" t-as="g" t-key="g_index">
+                                                    <span class="badge bg-secondary me-1"><t t-esc="g"/></span>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

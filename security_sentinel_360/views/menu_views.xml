@@ -1,0 +1,17 @@
+<odoo>
+    <menuitem id="menu_session_audit_root" name="Security &amp; Sentinel(360)" sequence="90"
+              groups="security_sentinel_360.group_session_audit_user"/>
+    <menuitem id="menu_audit_dashboard" name="Dashboard" parent="menu_session_audit_root"
+              action="action_audit_dashboard" sequence="1"/>
+    <menuitem id="menu_user_session" name="Sessions" parent="menu_session_audit_root"
+              action="action_user_session" sequence="10"/>
+    <menuitem id="menu_audit_log" name="Audit Log" parent="menu_session_audit_root"
+              action="action_audit_log" sequence="30"/>
+    <menuitem id="menu_audit_rule" name="Audit Rules" parent="menu_session_audit_root"
+              action="action_audit_rule" groups="group_session_audit_manager" sequence="30"/>
+    <menuitem id="menu_audit_access_matrix" name="Access Matrix"
+              parent="menu_session_audit_root" sequence="20"/>
+    <menuitem id="menu_audit_access_matrix_main" name="Access Matrix"
+              parent="menu_audit_access_matrix" action="action_access_matrix"
+              sequence="1"/>
+</odoo>

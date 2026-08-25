@@ -1,0 +1,184 @@
+.o_access_matrix {
+    background: #f8f9fa;
+    min-height: 100vh;
+
+    .legend-item {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .matrix-scroll-container {
+        overflow: auto;
+        max-height: calc(100vh - 280px);
+        background: white;
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .matrix-table {
+        border-collapse: separate;
+        border-spacing: 0;
+        font-size: 11px;
+
+        thead th {
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            background: #343a40;
+            color: white;
+            padding: 8px 4px;
+            min-width: 70px;
+            max-width: 70px;
+            border-bottom: 2px solid #007bff;
+        }
+
+        .matrix-corner {
+            position: sticky;
+            top: 0;
+            left: 0;
+            z-index: 10 !important;
+            background: #212529;
+            min-width: 200px !important;
+            max-width: 200px !important;
+            text-align: left;
+            padding: 8px 12px;
+        }
+
+        .matrix-model-header {
+            text-align: center;
+
+            &.sensitive-model {
+                background: #6f0000;
+                color: #ffe;
+            }
+
+            .model-header-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .model-name {
+                    writing-mode: vertical-rl;
+                    transform: rotate(180deg);
+                    white-space: nowrap;
+                    font-family: monospace;
+                    font-size: 10px;
+                    max-height: 100px;
+                }
+
+                .sensitive-marker {
+                    margin-bottom: 4px;
+                    font-size: 12px;
+                }
+            }
+        }
+
+        .matrix-user-cell {
+            position: sticky;
+            left: 0;
+            z-index: 4;
+            background: #f8f9fa;
+            min-width: 200px;
+            max-width: 200px;
+            padding: 8px 12px;
+            border-right: 2px solid #dee2e6;
+            border-bottom: 1px solid #dee2e6;
+
+            &.admin-user {
+                background: #fff3cd;
+            }
+
+            .user-name {
+                font-size: 10px;
+                color: #6c757d;
+                font-weight: normal;
+            }
+        }
+
+        .matrix-cell {
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 6px 4px;
+            border-bottom: 1px solid #dee2e6;
+            border-right: 1px solid #f1f3f5;
+            transition: transform 0.1s, box-shadow 0.1s;
+
+            &:hover {
+                transform: scale(1.1);
+                z-index: 3;
+                position: relative;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            }
+        }
+    }
+
+    /* Cell color coding */
+    .matrix-cell-admin { background: #ffd700 !important; color: #5c4900; }
+    .matrix-cell-full  { background: #dc3545 !important; color: white; }
+    .matrix-cell-write { background: #fd7e14 !important; color: white; }
+    .matrix-cell-read  { background: #28a745 !important; color: white; }
+    .matrix-cell-none  { background: #f8f9fa; color: #adb5bd; }
+
+    /* Modal styles */
+    .modal-backdrop-custom {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 1050;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .modal-content-custom {
+        background: white;
+        border-radius: 8px;
+        max-width: 700px;
+        width: 100%;
+        max-height: 90vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+
+        &.modal-large {
+            max-width: 1100px;
+        }
+
+        .modal-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            h5 { margin: 0; }
+
+            .btn-close {
+                background: transparent;
+                border: none;
+                font-size: 24px;
+                cursor: pointer;
+                color: #6c757d;
+
+                &::before { content: "×"; }
+            }
+        }
+
+        .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+        }
+    }
+
+    .compare-results {
+        max-height: 50vh;
+        overflow-y: auto;
+    }
+}
