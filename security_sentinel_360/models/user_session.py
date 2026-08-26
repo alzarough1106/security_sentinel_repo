@@ -182,7 +182,6 @@ class ResUsersSession(models.Model):
                 "os": self.operating_system or _("Unknown"),
             },
             partner_ids=partner.ids,
-            message_type="user_notification",
             email_layout_xmlid="mail.mail_notification_light",
             author_id=self.env.ref("base.partner_root").id,
         )
