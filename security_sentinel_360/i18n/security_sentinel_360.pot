@@ -9,11 +9,12 @@ msgstr ""
 "POT-Creation-Date: 2026-08-26 05:16+0000\n"
 "PO-Revision-Date: 2026-08-26 05:16+0000\n"
 "Last-Translator: \n"
-"Language-Team: \n"
+"Language-Team: Arabic\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Language: ar\n"
 
 #. module: security_sentinel_360
 #: model:mail.template,body_html:security_sentinel_360.mail_template_new_session
@@ -32,68 +33,81 @@ msgid ""
 "            </div>\n"
 "        "
 msgstr ""
+"<div>\n"
+"                <p>مرحباً <t t-out=\"object.user_id.name\"/>،</p>\n"
+"                <p>تم رصد تسجيل دخول جديد إلى حسابك:</p>\n"
+"                <ul>\n"
+"                    <li>التاريخ: <t t-out=\"object.login_date\"/></li>\n"
+"                    <li>عنوان IP: <t t-out=\"object.ip_address\"/></li>\n"
+"                    <li>المتصفح: <t t-out=\"object.browser\"/> <t t-out=\"object.browser_version\"/></li>\n"
+"                    <li>نظام التشغيل: <t t-out=\"object.operating_system\"/></li>\n"
+"                    <li>الجهاز: <t t-out=\"object.device_type\"/></li>\n"
+"                </ul>\n"
+"                <p>إذا لم تكن أنت من قام بذلك، يرجى إنهاء هذه الجلسة فوراً وتغيير كلمة المرور الخاصة بك.</p>\n"
+"            </div>\n"
+"        "
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_kanban
 msgid "<i class=\"fa fa-desktop\" title=\"Device\"/>"
-msgstr ""
+msgstr "<i class=\"fa fa-desktop\" title=\"الجهاز\"/>"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_kanban
 msgid "<i class=\"fa fa-map-marker\" title=\"IP Address\"/>"
-msgstr ""
+msgstr "<i class=\"fa fa-map-marker\" title=\"عنوان IP\"/>"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_kanban
 msgid "<i class=\"fa fa-user\" title=\"User\"/>"
-msgstr ""
+msgstr "<i class=\"fa fa-user\" title=\"المستخدم\"/>"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_form
 msgid "<span>Open Record</span>"
-msgstr ""
+msgstr "<span>فتح السجل</span>"
 
 #. module: security_sentinel_360
 #: model:ir.model.constraint,message:security_sentinel_360.constraint_audit_rule_model_uniq
 msgid "A rule already exists for this model."
-msgstr ""
+msgstr "توجد قاعدة بالفعل لهذا النموذج."
 
 #. module: security_sentinel_360
 #: model:ir.model.constraint,message:security_sentinel_360.constraint_res_users_session_session_token_uniq
 msgid "A session with this token already exists."
-msgstr ""
+msgstr "توجد جلسة بهذا الرمز بالفعل."
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "ADMIN"
-msgstr ""
+msgstr "مدير"
 
 #. module: security_sentinel_360
 #: model:ir.ui.menu,name:security_sentinel_360.menu_audit_access_matrix
 #: model:ir.ui.menu,name:security_sentinel_360.menu_audit_access_matrix_main
 msgid "Access Matrix"
-msgstr ""
+msgstr "مصفوفة الصلاحيات"
 
 #. module: security_sentinel_360
 #: model:ir.model,name:security_sentinel_360.model_audit_access_matrix_snapshot
 msgid "Access Matrix Snapshot"
-msgstr ""
+msgstr "لقطة مصفوفة الصلاحيات"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_access_matrix_snapshot_form
 msgid "Access Review"
-msgstr ""
+msgstr "مراجعة الصلاحيات"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_access_matrix_snapshot_list
 msgid "Access Reviews"
-msgstr ""
+msgstr "مراجعات الصلاحيات"
 
 #. module: security_sentinel_360
 #: model:ir.actions.act_window,name:security_sentinel_360.action_access_matrix_snapshot
 msgid "Access Reviews (Snapshots)"
-msgstr ""
+msgstr "مراجعات الصلاحيات (اللقطات)"
 
 #. module: security_sentinel_360
 #. odoo-javascript
@@ -101,118 +115,118 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_form
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_search
 msgid "Action"
-msgstr ""
+msgstr "الإجراء"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_list
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_form
 msgid "Action Performed"
-msgstr ""
+msgstr "الإجراء المنفذ"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/audit_dashboard.xml:0
 msgid "Actions by Type (7d)"
-msgstr ""
+msgstr "الإجراءات حسب النوع (7 أيام)"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_rule__active
 #: model:ir.model.fields.selection,name:security_sentinel_360.selection__res_users_session__state__active
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_search
 msgid "Active"
-msgstr ""
+msgstr "نشط"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/audit_dashboard.xml:0
 msgid "Active Sessions"
-msgstr ""
+msgstr "الجلسات النشطة"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_users_session__audit_log_ids
 msgid "Activities"
-msgstr ""
+msgstr "الأنشطة"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_form
 msgid "Activity Log"
-msgstr ""
+msgstr "سجل النشاط"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/audit_dashboard.xml:0
 msgid "Activity Trend (14 days)"
-msgstr ""
+msgstr "اتجاه النشاط (14 يوماً)"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_rule_form
 msgid "Add contextual notes or explanation for this audit rule..."
-msgstr ""
+msgstr "إضافة ملاحظات سياقية أو توضيح لقاعدة التدقيق هذه..."
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_access_matrix_snapshot_form
 msgid "Add notes from the review process..."
-msgstr ""
+msgstr "إضافة ملاحظات من عملية المراجعة..."
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_snapshot__admin_count
 msgid "Admin Count"
-msgstr ""
+msgstr "عدد المسؤولين"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Administrator"
-msgstr ""
+msgstr "مدير النظام"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "All companies"
-msgstr ""
+msgstr "جميع الشركات"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "All groups"
-msgstr ""
+msgstr "جميع المجموعات"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_access_matrix_snapshot_form
 msgid "Approve"
-msgstr ""
+msgstr "موافقة"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields.selection,name:security_sentinel_360.selection__audit_access_matrix_snapshot__review_state__approved
 msgid "Approved"
-msgstr ""
+msgstr "تمت الموافقة"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_rule_form
 msgid "Archived"
-msgstr ""
+msgstr "مؤرشف"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_form
 msgid ""
 "Are you sure? If this is your current session, you will be logged out "
 "immediately."
-msgstr ""
+msgstr "هل أنت تأكد؟ إذا كانت هذه جلساتك الحالية، فسيتم تسجيل خروجك على الفور."
 
 #. module: security_sentinel_360
 #: model:ir.model,name:security_sentinel_360.model_audit_dashboard
 msgid "Audit & Session Dashboard Data Provider"
-msgstr ""
+msgstr "مكفّل بيانات لوحة تحكم التدقيق والجلسات"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_users_session__audit_count
 msgid "Audit Count"
-msgstr ""
+msgstr "عدد عمليات التدقيق"
 
 #. module: security_sentinel_360
 #: model:ir.actions.client,name:security_sentinel_360.action_audit_dashboard
 msgid "Audit Dashboard"
-msgstr ""
+msgstr "لوحة تحكم التدقيق"
 
 #. module: security_sentinel_360
 #: model:ir.actions.act_window,name:security_sentinel_360.action_audit_log
@@ -220,33 +234,33 @@ msgstr ""
 #: model:ir.ui.menu,name:security_sentinel_360.menu_audit_log
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.res_config_settings_view_form
 msgid "Audit Log"
-msgstr ""
+msgstr "سجل التدقيق"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_config_settings__audit_log_retention_days
 msgid "Audit Log Retention (days)"
-msgstr ""
+msgstr "مدة الاحتفاظ بسجل التدقيق (بالأيام)"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/audit_dashboard.xml:0
 msgid "Audit Logs Today"
-msgstr ""
+msgstr "سجلات التدقيق اليوم"
 
 #. module: security_sentinel_360
 #: model:ir.model,name:security_sentinel_360.model_audit_rule
 msgid "Audit Rule"
-msgstr ""
+msgstr "قاعدة التدقيق"
 
 #. module: security_sentinel_360
 #: model:ir.ui.menu,name:security_sentinel_360.menu_audit_rule
 msgid "Audit Rules"
-msgstr ""
+msgstr "قواعد التدقيق"
 
 #. module: security_sentinel_360
 #: model:ir.model,name:security_sentinel_360.model_base
 msgid "Base"
-msgstr ""
+msgstr "الأساس"
 
 #. module: security_sentinel_360
 #. odoo-python
@@ -254,111 +268,111 @@ msgstr ""
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_users_session__browser
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_search
 msgid "Browser"
-msgstr ""
+msgstr "المتصفح"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_users_session__browser_version
 msgid "Browser Version"
-msgstr ""
+msgstr "إصدار المتصفح"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/audit_dashboard.xml:0
 msgid "Browser/OS"
-msgstr ""
+msgstr "المتصفح/نظام التشغيل"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_export_wizard__file_data
 msgid "CSV File"
-msgstr ""
+msgstr "ملف CSV"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_log__field_changes
 msgid "Change Details (JSON)"
-msgstr ""
+msgstr "تفاصيل التغيير (JSON)"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_form
 msgid "Changes"
-msgstr ""
+msgstr "التغييرات"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_log__changes_detail
 msgid "Changes Detail"
-msgstr ""
+msgstr "تفاصيل التغييرات"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_log__changes_summary
 msgid "Changes Summary"
-msgstr ""
+msgstr "ملخص التغييرات"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_form
 msgid "Changes Views"
-msgstr ""
+msgstr "عروض التغييرات"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_access_matrix_export_wizard_form
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_export_wizard_form
 msgid "Close"
-msgstr ""
+msgstr "إغلاق"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields.selection,name:security_sentinel_360.selection__res_users_session__state__closed
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_search
 msgid "Closed"
-msgstr ""
+msgstr "مغلق"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_log__company_id
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_users_session__company_id
 msgid "Company"
-msgstr ""
+msgstr "الشركة"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Compare"
-msgstr ""
+msgstr "مقارنة"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Compare Users"
-msgstr ""
+msgstr "مقارنة المستخدمين"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Computing access matrix..."
-msgstr ""
+msgstr "جاري احتساب مصفوفة الصلاحيات..."
 
 #. module: security_sentinel_360
 #: model:ir.model,name:security_sentinel_360.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "إعدادات التهيئة"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 #: model:ir.model.fields.selection,name:security_sentinel_360.selection__audit_log__method__create
 msgid "Create"
-msgstr ""
+msgstr "إنشاء"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_snapshot__create_date
 msgid "Create Date"
-msgstr ""
+msgstr "تاريخ الإنشاء"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_snapshot__create_uid
 msgid "Create Uid"
-msgstr ""
+msgstr "معرف مُنشئ السجل"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_search
 msgid "Created"
-msgstr ""
+msgstr "تم إنشاؤه"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_export_wizard__create_uid
@@ -367,7 +381,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_rule__create_uid
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_users_session__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "أنشئ بواسطة"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_export_wizard__create_date
@@ -376,18 +390,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_rule__create_date
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_users_session__create_date
 msgid "Created on"
-msgstr ""
+msgstr "أنشئ في"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/audit_dashboard.xml:0
 msgid "Creates (7d)"
-msgstr ""
+msgstr "الإنشاءات (7 أيام)"
 
 #. module: security_sentinel_360
 #: model:ir.ui.menu,name:security_sentinel_360.menu_audit_dashboard
 msgid "Dashboard"
-msgstr ""
+msgstr "لوحة التحكم"
 
 #. module: security_sentinel_360
 #. odoo-javascript
@@ -396,64 +410,64 @@ msgstr ""
 #: code:addons/security_sentinel_360/static/src/xml/audit_dashboard.xml:0
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_form
 msgid "Date"
-msgstr ""
+msgstr "التاريخ"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_search
 msgid "Date (Day)"
-msgstr ""
+msgstr "التاريخ (اليوم)"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_search
 msgid "Date (Month)"
-msgstr ""
+msgstr "التاريخ (الشهر)"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_search
 msgid "Date (Week)"
-msgstr ""
+msgstr "التاريخ (الأسبوع)"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 #: model:ir.model.fields.selection,name:security_sentinel_360.selection__audit_log__method__unlink
 msgid "Delete"
-msgstr ""
+msgstr "حذف"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_search
 msgid "Deleted"
-msgstr ""
+msgstr "محذوف"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/audit_dashboard.xml:0
 msgid "Deletes (7d)"
-msgstr ""
+msgstr "الحذفيات (7 أيام)"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_access_matrix_snapshot_form
 msgid "Describe the purpose of this access review..."
-msgstr ""
+msgstr "صِف الغرض من مراجعة الصلاحيات هذه..."
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_snapshot__description
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_access_matrix_snapshot_form
 msgid "Description"
-msgstr ""
+msgstr "الوصف"
 
 #. module: security_sentinel_360
 #. odoo-python
 #: code:addons/security_sentinel_360/models/user_session.py:0
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_form
 msgid "Device"
-msgstr ""
+msgstr "الجهاز"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_users_session__device_type
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_search
 msgid "Device Type"
-msgstr ""
+msgstr "نوع الجهاز"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_export_wizard__display_name
@@ -463,164 +477,164 @@ msgstr ""
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_rule__display_name
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_users_session__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "اسم العرض"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Domain"
-msgstr ""
+msgstr "النطاق"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields.selection,name:security_sentinel_360.selection__audit_access_matrix_export_wizard__state__done
 #: model:ir.model.fields.selection,name:security_sentinel_360.selection__audit_export_wizard__state__done
 msgid "Done"
-msgstr ""
+msgstr "تم"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields.selection,name:security_sentinel_360.selection__audit_access_matrix_export_wizard__state__draft
 #: model:ir.model.fields.selection,name:security_sentinel_360.selection__audit_access_matrix_snapshot__review_state__draft
 #: model:ir.model.fields.selection,name:security_sentinel_360.selection__audit_export_wizard__state__draft
 msgid "Draft"
-msgstr ""
+msgstr "مسودة"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,help:security_sentinel_360.field_audit_export_wizard__event_types
 msgid "E.g.: login,login_failed,unlink"
-msgstr ""
+msgstr "مثال: login,login_failed,unlink"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_config_settings__notify_new_login_email
 msgid "Email Alert on New Device/IP Login"
-msgstr ""
+msgstr "تنبيه عبر البريد الإلكتروني عند تسجيل الدخول من جهاز/عنوان IP جديد"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_export_wizard__event_types
 msgid "Event Types (comma-separated, optional)"
-msgstr ""
+msgstr "أنواع الأحداث (مفصولة بفواصل، اختياري)"
 
 #. module: security_sentinel_360
 #: model:ir.actions.act_window,name:security_sentinel_360.action_access_matrix_export_wizard
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_access_matrix_export_wizard_form
 msgid "Export Access Matrix"
-msgstr ""
+msgstr "تصدير مصفوفة الصلاحيات"
 
 #. module: security_sentinel_360
 #: model:ir.model,name:security_sentinel_360.model_audit_access_matrix_export_wizard
 msgid "Export Access Matrix to CSV"
-msgstr ""
+msgstr "تصدير مصفوفة الصلاحيات إلى CSV"
 
 #. module: security_sentinel_360
 #: model:ir.actions.act_window,name:security_sentinel_360.action_audit_export_wizard
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_export_wizard_form
 msgid "Export Audit Logs"
-msgstr ""
+msgstr "تصدير سجلات التدقيق"
 
 #. module: security_sentinel_360
 #: model:ir.model,name:security_sentinel_360.model_audit_export_wizard
 msgid "Export Audit Logs to CSV"
-msgstr ""
+msgstr "تصدير سجلات التدقيق إلى CSV"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Export CSV"
-msgstr ""
+msgstr "تصدير CSV"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_access_matrix_export_wizard_form
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_export_wizard_form
 msgid "Export to CSV"
-msgstr ""
+msgstr "التصدير إلى CSV"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_export_wizard__file_data
 msgid "File Data"
-msgstr ""
+msgstr "بيانات الملف"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_export_wizard__file_name
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_export_wizard__file_name
 msgid "File Name"
-msgstr ""
+msgstr "اسم الملف"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_export_wizard__company_id
 msgid "Filter Company"
-msgstr ""
+msgstr "تصفية حسب الشركة"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_export_wizard__group_id
 msgid "Filter Group"
-msgstr ""
+msgstr "تصفية حسب المجموعة"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_export_wizard__user_ids
 msgid "Filter Users (optional)"
-msgstr ""
+msgstr "تصفية المستخدمين (اختياري)"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Filter by Company"
-msgstr ""
+msgstr "التصفية حسب الشركة"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Filter by Group"
-msgstr ""
+msgstr "التصفية حسب المجموعة"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Find"
-msgstr ""
+msgstr "بحث"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Found"
-msgstr ""
+msgstr "تم العثور على"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_export_wizard__date_from
 msgid "From"
-msgstr ""
+msgstr "من"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_rule_form
 msgid "General Configuration"
-msgstr ""
+msgstr "التهيئة العامة"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Global"
-msgstr ""
+msgstr "عام"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Group"
-msgstr ""
+msgstr "المجموعة"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_search
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_search
 msgid "Group By"
-msgstr ""
+msgstr "تجميع حسب"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Groups"
-msgstr ""
+msgstr "المجموعات"
 
 #. module: security_sentinel_360
 #: model:ir.model,name:security_sentinel_360.model_ir_http
 msgid "HTTP Routing"
-msgstr ""
+msgstr "مسارات HTTP"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_export_wizard__id
@@ -630,14 +644,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_rule__id
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_users_session__id
 msgid "ID"
-msgstr ""
+msgstr "المُعرّف"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/audit_dashboard.xml:0
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_form
 msgid "IP"
-msgstr ""
+msgstr "IP"
 
 #. module: security_sentinel_360
 #. odoo-python
@@ -646,12 +660,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_search
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_search
 msgid "IP Address"
-msgstr ""
+msgstr "عنوان IP"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_config_settings__session_idle_timeout_minutes
 msgid "Idle Session Timeout (minutes)"
-msgstr ""
+msgstr "مهلة انتهاء الجلسة الخاملة (بالدقائق)"
 
 #. module: security_sentinel_360
 #. odoo-python
@@ -659,69 +673,69 @@ msgstr ""
 msgid ""
 "If this wasn't you, open Session & Audit → Sessions and kill this session "
 "immediately, then change your password."
-msgstr ""
+msgstr "إذا لم تكن أنت، افتح الجلسة والتدقيق ← الجلسات وقم بإنهاء هذه الجلسة فوراً، ثم غير كلمة المرور الخاصة بك."
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_config_settings__notify_new_login_inbox
 msgid "Inbox Alert on New Device/IP Login"
-msgstr ""
+msgstr "تنبيه في صندوق الإشعارات عند تسجيل الدخول من جهاز/عنوان IP جديد"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_export_wizard__show_share_users
 msgid "Include Portal Users"
-msgstr ""
+msgstr "تضمين مستخدمي البوابة"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Include portal users"
-msgstr ""
+msgstr "تضمين مستخدمي البوابة"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_log__ip_address
 msgid "Ip Address"
-msgstr ""
+msgstr "عنوان IP"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_users_session__is_new_device
 msgid "Is New Device"
-msgstr ""
+msgstr "هل هو جهاز جديد"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_form
 msgid "Kill Session"
-msgstr ""
+msgstr "إنهاء الجلسة"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields.selection,name:security_sentinel_360.selection__res_users_session__state__killed
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_search
 msgid "Killed"
-msgstr ""
+msgstr "منهية"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/audit_dashboard.xml:0
 msgid "Killed Sessions"
-msgstr ""
+msgstr "الجلسات المنهية"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_search
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_search
 msgid "Last 30 Days"
-msgstr ""
+msgstr "آخر 30 يوماً"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_search
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_search
 msgid "Last 7 Days"
-msgstr ""
+msgstr "آخر 7 أيام"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/audit_dashboard.xml:0
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_users_session__last_activity
 msgid "Last Activity"
-msgstr ""
+msgstr "آخر نشاط"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_export_wizard__write_uid
@@ -731,7 +745,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_rule__write_uid
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_users_session__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "آخر تحديث بواسطة"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_export_wizard__write_date
@@ -741,83 +755,83 @@ msgstr ""
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_rule__write_date
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_users_session__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "آخر تحديث في"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_kanban
 msgid "Last activity:"
-msgstr ""
+msgstr "آخر نشاط:"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_rule__log_create
 msgid "Log Create"
-msgstr ""
+msgstr "تسجيل الإنشاء"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_rule__log_unlink
 msgid "Log Delete"
-msgstr ""
+msgstr "تسجيل الحذف"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_rule__log_read
 msgid "Log Read"
-msgstr ""
+msgstr "تسجيل القراءة"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_rule__log_write
 msgid "Log Update"
-msgstr ""
+msgstr "تسجيل التحديث"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_rule_form
 msgid "Logged Operations"
-msgstr ""
+msgstr "العمليات المسجلة"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Login"
-msgstr ""
+msgstr "تسجيل الدخول"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_users_session__login_date
 msgid "Login Date"
-msgstr ""
+msgstr "تاريخ تسجيل الدخول"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_search
 msgid "Login Date (Day)"
-msgstr ""
+msgstr "تاريخ تسجيل الدخول (اليوم)"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_search
 msgid "Login Date (Month)"
-msgstr ""
+msgstr "تاريخ تسجيل الدخول (الشهر)"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_search
 msgid "Login Date (Week)"
-msgstr ""
+msgstr "تاريخ تسجيل الدخول (الأسبوع)"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_users_session__logout_date
 msgid "Logout Date"
-msgstr ""
+msgstr "تاريخ تسجيل الخروج"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.res_config_settings_view_form
 msgid "Logs older than this are purged automatically (0 = keep forever)."
-msgstr ""
+msgstr "السجلات الأقدم من ذلك يتم حذفها تلقائياً (0 = الاحتفاظ بها دائماً)."
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_log__method
 msgid "Method"
-msgstr ""
+msgstr "الطريقة"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_export_wizard__min_risk_score
 msgid "Minimum Risk Score"
-msgstr ""
+msgstr "الحد الأدنى لدرجة المخاطرة"
 
 #. module: security_sentinel_360
 #. odoo-javascript
@@ -830,59 +844,59 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_search
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_form
 msgid "Model"
-msgstr ""
+msgstr "النموذج"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Model (technical name)"
-msgstr ""
+msgstr "النموذج (الاسم التقني)"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_snapshot__model_count
 msgid "Model Count"
-msgstr ""
+msgstr "عدد النماذج"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Model:"
-msgstr ""
+msgstr "النموذج:"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields.selection,name:security_sentinel_360.selection__audit_log__method__write
 msgid "Modify"
-msgstr ""
+msgstr "تعديل"
 
 #. module: security_sentinel_360
 #: model:ir.model,name:security_sentinel_360.model_ir_module_module
 msgid "Module"
-msgstr ""
+msgstr "التطبيق"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields.selection,name:security_sentinel_360.selection__audit_log__method__module_install
 msgid "Module Install"
-msgstr ""
+msgstr "تثبيت التطبيق"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_search
 msgid "Module Install/Uninstall"
-msgstr ""
+msgstr "تثبيت/إلغاء تثبيت التطبيق"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields.selection,name:security_sentinel_360.selection__audit_log__method__module_uninstall
 msgid "Module Uninstall"
-msgstr ""
+msgstr "إلغاء تثبيت التطبيق"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_search
 msgid "My Activity"
-msgstr ""
+msgstr "أنشطتي"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_search
 msgid "My Sessions"
-msgstr ""
+msgstr "جلساتي"
 
 #. module: security_sentinel_360
 #. odoo-javascript
@@ -891,81 +905,81 @@ msgstr ""
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_log__name
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_users_session__name
 msgid "Name"
-msgstr ""
+msgstr "الاسم"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/audit_dashboard.xml:0
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_kanban
 msgid "New Device"
-msgstr ""
+msgstr "جهاز جديد"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_search
 msgid "New Devices"
-msgstr ""
+msgstr "أجهزة جديدة"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/audit_dashboard.xml:0
 msgid "New Devices Today"
-msgstr ""
+msgstr "أجهزة جديدة اليوم"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.res_config_settings_view_form
 msgid "New Login Notifications"
-msgstr ""
+msgstr "إشعارات تسجيل الدخول الجديدة"
 
 #. module: security_sentinel_360
 #: model:mail.template,name:security_sentinel_360.mail_template_new_session
 msgid "New Login Session Notification"
-msgstr ""
+msgstr "إشعار جلسة دخول جديدة"
 
 #. module: security_sentinel_360
 #. odoo-python
 #: code:addons/security_sentinel_360/models/user_session.py:0
 #: model:mail.template,subject:security_sentinel_360.mail_template_new_session
 msgid "New login detected on your account"
-msgstr ""
+msgstr "تم رصد تسجيل دخول جديد إلى حسابك"
 
 #. module: security_sentinel_360
 #. odoo-python
 #: code:addons/security_sentinel_360/models/user_session.py:0
 msgid "New login detected — %(browser)s on %(os)s"
-msgstr ""
+msgstr "تم رصد تسجيل دخول جديد — %(browser)s على %(os)s"
 
 #. module: security_sentinel_360
 #: model_terms:ir.actions.act_window,help:security_sentinel_360.action_access_matrix_snapshot
 msgid "No access reviews yet"
-msgstr ""
+msgstr "لا توجد مراجعات صلاحيات بعد"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "No applicable ACL rules grant access."
-msgstr ""
+msgstr "لا توجد قواعد قائمة التحكم بالوصول (ACL) ينطبق عليها منح الصلاحية."
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "No record-level rules apply."
-msgstr ""
+msgstr "لا تنطبق أي قواعد على مستوى السجل."
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_rule__note
 msgid "Note"
-msgstr ""
+msgstr "ملاحظة"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_rule_form
 msgid "Notes"
-msgstr ""
+msgstr "ملاحظات"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_form
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_search
 msgid "OS"
-msgstr ""
+msgstr "نظام التشغيل"
 
 #. module: security_sentinel_360
 #. odoo-python
@@ -973,43 +987,43 @@ msgstr ""
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_users_session__operating_system
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_search
 msgid "Operating System"
-msgstr ""
+msgstr "نظام التشغيل"
 
 #. module: security_sentinel_360
 #: model:ir.actions.act_window,name:security_sentinel_360.action_audit_rule
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_rule_form
 msgid "Override tracking (Audit Rule)"
-msgstr ""
+msgstr "تجاوز التتبع (قاعدة التدقيق)"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_form
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_list
 msgid "Performed Date"
-msgstr ""
+msgstr "تاريخ التنفيذ"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Permission"
-msgstr ""
+msgstr "الصلاحية"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "R Read"
-msgstr ""
+msgstr "R قراءة"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "RW Write"
-msgstr ""
+msgstr "RW كتابة"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "RWCD Full"
-msgstr ""
+msgstr "RWCD كاملة"
 
 #. module: security_sentinel_360
 #. odoo-javascript
@@ -1017,30 +1031,30 @@ msgstr ""
 #: model:ir.model.fields.selection,name:security_sentinel_360.selection__audit_log__method__read
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_search
 msgid "Read"
-msgstr ""
+msgstr "قراءة"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/audit_dashboard.xml:0
 msgid "Recent Activity"
-msgstr ""
+msgstr "النشاط الحديث"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_rule__is_recommended
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_rule_form
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_rule_list
 msgid "Recommended Default"
-msgstr ""
+msgstr "الافتراضي الموصى به"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_search
 msgid "Record"
-msgstr ""
+msgstr "السجل"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_form
 msgid "Record ID"
-msgstr ""
+msgstr "معرف السجل"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_log__record_name
@@ -1048,197 +1062,197 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_list
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_form
 msgid "Record Name"
-msgstr ""
+msgstr "اسم السجل"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Refresh"
-msgstr ""
+msgstr "تحديث"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_access_matrix_snapshot_form
 msgid "Refresh Snapshot"
-msgstr ""
+msgstr "تحديث اللقطة"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_access_matrix_snapshot_form
 msgid "Reject"
-msgstr ""
+msgstr "رفض"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields.selection,name:security_sentinel_360.selection__audit_access_matrix_snapshot__review_state__rejected
 msgid "Rejected"
-msgstr ""
+msgstr "مرفوض"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_log__res_id
 msgid "Res"
-msgstr ""
+msgstr "معرف المورد"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Reverse Search"
-msgstr ""
+msgstr "البحث العكسي"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_snapshot__review_notes
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_access_matrix_snapshot_form
 msgid "Review Notes"
-msgstr ""
+msgstr "ملاحظات المراجعة"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_snapshot__review_state
 msgid "Review State"
-msgstr ""
+msgstr "حالة المراجعة"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_snapshot__reviewed_by_id
 msgid "Reviewed By"
-msgstr ""
+msgstr "تمت المراجعة بواسطة"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_snapshot__reviewed_date
 msgid "Reviewed Date"
-msgstr ""
+msgstr "تاريخ المراجعة"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Rule"
-msgstr ""
+msgstr "القاعدة"
 
 #. module: security_sentinel_360
 #: model:ir.module.category,name:security_sentinel_360.module_category_session_audit
 msgid "SSecurity & Sentinel(360)"
-msgstr ""
+msgstr "الأمان والحارس (360)"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_search
 msgid "Search Audit Logs"
-msgstr ""
+msgstr "البحث في سجلات التدقيق"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Search Models"
-msgstr ""
+msgstr "البحث في النماذج"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_search
 msgid "Search Sessions"
-msgstr ""
+msgstr "البحث في الجلسات"
 
 #. module: security_sentinel_360
 #: model:ir.ui.menu,name:security_sentinel_360.menu_session_audit_root
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.res_config_settings_view_form
 msgid "Security & Sentinel(360)"
-msgstr ""
+msgstr "الأمان والحارس (360)"
 
 #. module: security_sentinel_360
 #: model:res.groups,name:security_sentinel_360.group_session_audit_manager
 msgid "Security & Sentinel(360) / Manager"
-msgstr ""
+msgstr "الأمان والحارس (360) / المدير"
 
 #. module: security_sentinel_360
 #: model:res.groups,name:security_sentinel_360.group_session_audit_user
 msgid "Security & Sentinel(360) / User"
-msgstr ""
+msgstr "الأمان والحارس (360) / المستخدم"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Select user..."
-msgstr ""
+msgstr "اختر المستخدم..."
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.res_config_settings_view_form
 msgid ""
 "Send an email when a user logs in from a new device or a never-seen-before "
 "IP address."
-msgstr ""
+msgstr "إرسال بريد إلكتروني عند تسجيل دخول المستخدم من جهاز جديد أو عنوان IP لم يسبق رؤيته."
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_export_wizard__sensitive_only
 msgid "Sensitive Models Only"
-msgstr ""
+msgstr "النماذج الحساسة فقط"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Sensitive only"
-msgstr ""
+msgstr "الحساسة فقط"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_log__session_id
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_form
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_search
 msgid "Session"
-msgstr ""
+msgstr "الجلسة"
 
 #. module: security_sentinel_360
 #: model:ir.actions.server,name:security_sentinel_360.ir_cron_kill_idle_sessions_ir_actions_server
 msgid "Session Audit: Auto Kill Idle Sessions"
-msgstr ""
+msgstr "تدقيق الجلسات: الإنهاء التلقائي للجلسات الخاملة"
 
 #. module: security_sentinel_360
 #: model:ir.actions.server,name:security_sentinel_360.ir_cron_purge_audit_logs_ir_actions_server
 msgid "Session Audit: Purge Old Audit Logs"
-msgstr ""
+msgstr "تدقيق الجلسات: التخلص من سجلات التدقيق القديمة"
 
 #. module: security_sentinel_360
 #: model:ir.actions.server,name:security_sentinel_360.ir_cron_purge_old_sessions_ir_actions_server
 msgid "Session Audit: Purge Old Closed/Killed Sessions"
-msgstr ""
+msgstr "تدقيق الجلسات: التخلص من الجلسات القديمة المغلقة/المنهية"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_users_session__session_token
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_search
 msgid "Session ID"
-msgstr ""
+msgstr "معرف الجلسة"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.res_config_settings_view_form
 msgid "Session Management"
-msgstr ""
+msgstr "إدارة الجلسات"
 
 #. module: security_sentinel_360
 #: model:ir.actions.act_window,name:security_sentinel_360.action_user_session
 #: model:ir.ui.menu,name:security_sentinel_360.menu_user_session
 msgid "Sessions"
-msgstr ""
+msgstr "الجلسات"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/audit_dashboard.xml:0
 msgid "Sessions by State"
-msgstr ""
+msgstr "الجلسات حسب الحالة"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.res_config_settings_view_form
 msgid "Sessions inactive longer than this are automatically killed."
-msgstr ""
+msgstr "الجلسات الخاملة لفترة أطول من هذه تنهى تلقائياً."
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.res_config_settings_view_form
 msgid "Show an in-app Inbox/bell notification for the same event."
-msgstr ""
+msgstr "إظهار إشعار في صندوق الرسائل/الجرس داخل التطبيق لنفس الحدث."
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_snapshot__snapshot_data
 msgid "Snapshot (JSON)"
-msgstr ""
+msgstr "اللقطة (JSON)"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_access_matrix_snapshot_form
 msgid "Snapshot Data (JSON)"
-msgstr ""
+msgstr "بيانات اللقطة (JSON)"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_access_matrix_snapshot_form
 msgid "Start Review"
-msgstr ""
+msgstr "بدء المراجعة"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_export_wizard__state
@@ -1246,30 +1260,30 @@ msgstr ""
 #: model:ir.model.fields,field_description:security_sentinel_360.field_res_users_session__state
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_search
 msgid "State"
-msgstr ""
+msgstr "الحالة"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_search
 msgid "Suspicious (New Device & Active)"
-msgstr ""
+msgstr "مشبوه (جهاز جديد ونشط)"
 
 #. module: security_sentinel_360
 #: model:ir.actions.server,name:security_sentinel_360.action_sync_recommended_rules
 msgid "Sync Recommended Rules"
-msgstr ""
+msgstr "مزامنة القواعد الموصى بها"
 
 #. module: security_sentinel_360
 #: model_terms:ir.actions.act_window,help:security_sentinel_360.action_access_matrix_snapshot
 msgid ""
 "Take periodic snapshots of permissions for SOC2/ISO 27001 access review "
 "compliance."
-msgstr ""
+msgstr "التقاط لقطات دورية للصلاحيات للامتثال لمراجعة الصلاحيات وفق معايير SOC2/ISO 27001."
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_log__model_name
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_rule__model_name
 msgid "Technical Model Name"
-msgstr ""
+msgstr "اسم النموذج التقني"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,help:security_sentinel_360.field_audit_rule__is_recommended
@@ -1277,52 +1291,52 @@ msgid ""
 "This rule was pre-seeded by the module as a recommended default (e.g. to "
 "disable tracking on high-volume line models). You can freely change its "
 "settings above."
-msgstr ""
+msgstr "تمت إضافة هذه القاعدة مسبقاً بواسطة التطبيق كإعداد افتراضي موصى به (على سبيل المثال: لإلغاء تتبع النماذج ذات الحجم الكبير من البنود). يمكنك تغيير إعداداتها أعلاه بحرية."
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_export_wizard__date_to
 msgid "To"
-msgstr ""
+msgstr "إلى"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_search
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_search
 msgid "Today"
-msgstr ""
+msgstr "اليوم"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/audit_dashboard.xml:0
 msgid "Top 5 Active Users (30d)"
-msgstr ""
+msgstr "أفضل 5 مستخدمين نشطين (30 يوماً)"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/audit_dashboard.xml:0
 msgid "Top 5 Touched Models (30d)"
-msgstr ""
+msgstr "أكثر 5 نماذج تعديلاً (30 يوماً)"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields.selection,name:security_sentinel_360.selection__audit_access_matrix_snapshot__review_state__reviewing
 msgid "Under Review"
-msgstr ""
+msgstr "قيد المراجعة"
 
 #. module: security_sentinel_360
 #. odoo-python
 #: code:addons/security_sentinel_360/models/user_session.py:0
 msgid "Unknown"
-msgstr ""
+msgstr "غير معروف"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_search
 msgid "Updated"
-msgstr ""
+msgstr "تم التحديث"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/audit_dashboard.xml:0
 msgid "Updates (7d)"
-msgstr ""
+msgstr "التحديثات (7 أيام)"
 
 #. module: security_sentinel_360
 #. odoo-javascript
@@ -1332,222 +1346,222 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_log_search
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_user_session_search
 msgid "User"
-msgstr ""
+msgstr "المستخدم"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "User A"
-msgstr ""
+msgstr "المستخدم أ"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 #: model:ir.actions.client,name:security_sentinel_360.action_access_matrix
 msgid "User Access Matrix"
-msgstr ""
+msgstr "مصفوفة صلاحيات المستخدمين"
 
 #. module: security_sentinel_360
 #: model:ir.model,name:security_sentinel_360.model_audit_access_matrix
 msgid "User Access Matrix Engine"
-msgstr ""
+msgstr "محرك مصفوفة صلاحيات المستخدمين"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "User B"
-msgstr ""
+msgstr "المستخدم ب"
 
 #. module: security_sentinel_360
 #: model:ir.model.fields,field_description:security_sentinel_360.field_audit_access_matrix_snapshot__user_count
 msgid "User Count"
-msgstr ""
+msgstr "عدد المستخدمين"
 
 #. module: security_sentinel_360
 #: model:ir.model,name:security_sentinel_360.model_res_users_session
 msgid "User Session"
-msgstr ""
+msgstr "جلسة المستخدم"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "User \\\\ Model"
-msgstr ""
+msgstr "المستخدم \\\\ النموذج"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "User's Groups"
-msgstr ""
+msgstr "مجموعات المستخدم"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "User:"
-msgstr ""
+msgstr "المستخدم:"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/audit_dashboard.xml:0
 msgid "View All"
-msgstr ""
+msgstr "عرض الكل"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "Write"
-msgstr ""
+msgstr "كتابة"
 
 #. module: security_sentinel_360
 #. odoo-python
 #: code:addons/security_sentinel_360/models/access_matrix.py:0
 msgid "You do not have access to the Audit & Compliance access matrix."
-msgstr ""
+msgstr "ليس لديك صلاحية الوصول إلى مصفوفة صلاحيات التدقيق والامتثال."
 
 #. module: security_sentinel_360
 #. odoo-python
 #: code:addons/security_sentinel_360/controllers/access_matrix.py:0
 msgid "You don't have access to the Access Matrix."
-msgstr ""
+msgstr "ليس لديك صلاحية الوصول إلى مصفوفة الصلاحيات."
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "admin(s)"
-msgstr ""
+msgstr "مسؤول (مسؤولين)"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/audit_dashboard.xml:0
 msgid "click a bar"
-msgstr ""
+msgstr "انقر على شريط"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/audit_dashboard.xml:0
 msgid "click a point to drill in"
-msgstr ""
+msgstr "انقر على نقطة للتفصيل"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/audit_dashboard.xml:0
 msgid "click a slice"
-msgstr ""
+msgstr "انقر على جزء"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "differences found."
-msgstr ""
+msgstr "تم العثور على اختلافيات."
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_access_matrix_snapshot_form
 msgid "e.g., Q1 2026 Access Review"
-msgstr ""
+msgstr "مثال: مراجعة الصلاحيات للربع الأول 2026"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "e.g., partner, account..."
-msgstr ""
+msgstr "مثال: الشريك، الحساب..."
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "e.g., res.partner, account.move"
-msgstr ""
+msgstr "مثال: res.partner, account.move"
 
 #. module: security_sentinel_360
 #: model_terms:ir.ui.view,arch_db:security_sentinel_360.view_audit_export_wizard_form
 msgid "login,unlink,export"
-msgstr ""
+msgstr "login,unlink,export"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "models"
-msgstr ""
+msgstr "نماذج"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "models identical,"
-msgstr ""
+msgstr "النماذج متطابقة،"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "permission on"
-msgstr ""
+msgstr "الصلاحية على"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "user(s) with"
-msgstr ""
+msgstr "مستخدم (مستخدمين) بـ"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "users"
-msgstr ""
+msgstr "مستخدمين"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "— None"
-msgstr ""
+msgstr "— لا شيء"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "— has full access to all models."
-msgstr ""
+msgstr "— لديه وصول كامل لجميع النماذج."
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "★ Admin (full)"
-msgstr ""
+msgstr "★ مسؤول (كامل)"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "⚖️ Compare User Permissions"
-msgstr ""
+msgstr "⚖️ مقارنة صلاحيات المستخدمين"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "✅ Applicable Access Rules"
-msgstr ""
+msgstr "✅ قواعد الوصول المطبقة"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "✓ Global"
-msgstr ""
+msgstr "✓ عام"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "⭐ This user is an"
-msgstr ""
+msgstr "⭐ هذا المستخدم هو"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "📋 Record Rules (ir.rule)"
-msgstr ""
+msgstr "📋 قواعد السجلات (ir.rule)"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "🔍 Access Explanation"
-msgstr ""
+msgstr "🔍 توضيح الصلاحيات"
 
 #. module: security_sentinel_360
 #. odoo-javascript
 #: code:addons/security_sentinel_360/static/src/xml/access_matrix.xml:0
 msgid "🔎 Reverse Search: Who Can...?"
-msgstr ""
+msgstr "🔎 البحث العكسي: من يستطيع...؟"

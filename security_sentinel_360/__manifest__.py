@@ -27,7 +27,11 @@
         "views/res_config_settings_views.xml",
         "views/menu_views.xml",
     ],
-
+    'images': [
+        'static/description/banner.png',
+        'static/description/banner.jpg',
+        'static/description/icon.png',
+    ],
     "assets": {
         "web.assets_backend": [
             "web/static/lib/Chart/Chart.js",
