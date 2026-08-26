@@ -27,6 +27,7 @@
         "views/res_config_settings_views.xml",
         "views/menu_views.xml",
     ],
+
     "assets": {
         "web.assets_backend": [
             "web/static/lib/Chart/Chart.js",
@@ -36,6 +37,10 @@
             "security_sentinel_360/static/src/js/access_matrix.js",
             'security_sentinel_360/static/src/xml/access_matrix.xml',
             'security_sentinel_360/static/src/scss/access_matrix.scss',
+        ],
+        'web.assets_frontend': [
+            'security_sentinel_360/static/src/css/faq_accordion.css',
+            'security_sentinel_360/static/src/js/faq_accordion.js',
         ],
     },
     "installable": True,
