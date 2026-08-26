@@ -21,11 +21,6 @@
                             <field name="audit_log_retention_days"/>
                         </setting>
                     </block>
-                    <block title="Audit Log" name="audit_log_setting_block">
-                        <setting help="Logs older than this are purged automatically (0 = keep forever).">
-                            <field name="audit_log_retention_days"/>
-                        </setting>
-                    </block>
                     <block title="New Login Notifications" name="new_login_notifications_block">
                         <setting
                                 help="Send an email when a user logs in from a new device or a never-seen-before IP address.">
