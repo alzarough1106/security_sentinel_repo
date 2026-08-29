@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="security_sentinel_360.Dashboard">
+        <div class="o_audit_dashboard p-4 h-100 overflow-auto o_scrollable">
+            <div t-if="state.loading" class="text-center p-5">
+                <i class="fa fa-spinner fa-spin fa-2x"/>
+            </div>
+
+            <div t-if="!state.loading">
+                <!-- KPI CARDS -->
+                <div class="row g-3 mb-3">
+                    <div class="col-md-3">
+                        <div class="o_kpi_card o_kpi_clickable bg-success-subtle border-start border-success border-4 p-3 rounded"
+                             t-on-click="openActiveSessions">
+                            <div class="o_kpi_label text-muted small">Active Sessions</div>
+                            <div class="o_kpi_value text-success fs-3 fw-bold" t-esc="state.data.kpis.active_sessions"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="o_kpi_card o_kpi_clickable bg-danger-subtle border-start border-danger border-4 p-3 rounded"
+                             t-on-click="openKilledSessions">
+                            <div class="o_kpi_label text-muted small">Killed Sessions</div>
+                            <div class="o_kpi_value text-danger fs-3 fw-bold" t-esc="state.data.kpis.killed_sessions"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="o_kpi_card o_kpi_clickable bg-warning-subtle border-start border-warning border-4 p-3 rounded"
+                             t-on-click="openNewDevicesToday">
+                            <div class="o_kpi_label text-muted small">New Devices Today</div>
+                            <div class="o_kpi_value text-warning fs-3 fw-bold"
+                                 t-esc="state.data.kpis.new_devices_today"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="o_kpi_card o_kpi_clickable bg-info-subtle border-start border-info border-4 p-3 rounded"
+                             t-on-click="openLogsToday">
+                            <div class="o_kpi_label text-muted small">Audit Logs Today</div>
+                            <div class="o_kpi_value text-info fs-3 fw-bold" t-esc="state.data.kpis.logs_today"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <div class="o_kpi_card o_kpi_clickable bg-primary-subtle border-start border-primary border-4 p-3 rounded"
+                             t-on-click="openCreates7d">
+                            <div class="o_kpi_label text-muted small">Creates (7d)</div>
+                            <div class="o_kpi_value text-primary fs-3 fw-bold" t-esc="state.data.kpis.creates_7d"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="o_kpi_card o_kpi_clickable bg-secondary-subtle border-start border-secondary border-4 p-3 rounded"
+                             t-on-click="openWrites7d">
+                            <div class="o_kpi_label text-muted small">Updates (7d)</div>
+                            <div class="o_kpi_value text-secondary fs-3 fw-bold" t-esc="state.data.kpis.writes_7d"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="o_kpi_card o_kpi_clickable bg-danger-subtle border-start border-danger border-4 p-3 rounded"
+                             t-on-click="openDeletes7d">
+                            <div class="o_kpi_label text-muted small">Deletes (7d)</div>
+                            <div class="o_kpi_value text-danger fs-3 fw-bold" t-esc="state.data.kpis.deletes_7d"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CHARTS ROW 1 -->
+                <div class="row g-3 mb-3">
+                    <div class="col-md-8">
+                        <div class="card p-3 shadow-sm h-100">
+                            <h6>Activity Trend (14 days) <small class="text-muted">(click a point to filter)</small></h6>
+                            <div class="chart-container position-relative" style="height: 260px;">
+                                <canvas t-ref="trendChart"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card p-3 shadow-sm h-100">
+                            <h6>Sessions by State</h6>
+                            <div class="chart-container position-relative" style="height: 260px;">
+                                <canvas t-ref="stateChart"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CHARTS ROW 2 -->
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <div class="card p-3 shadow-sm h-100">
+                            <h6>Actions by Type (7d)</h6>
+                            <div class="chart-container position-relative" style="height: 260px;">
+                                <canvas t-ref="actionsChart"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card p-3 shadow-sm h-100">
+                            <h6>Top Active Users (30d)</h6>
+                            <div class="chart-container position-relative" style="height: 260px;">
+                                <canvas t-ref="usersChart"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card p-3 shadow-sm h-100">
+                            <h6>Top Touched Models (30d)</h6>
+                            <div class="chart-container position-relative" style="height: 260px;">
+                                <canvas t-ref="modelsChart"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RECENT TABLES ROW -->
+                <div class="row g-3">
+                     <div class="col-md-6" t-if="state.data.active_sessions">
+                    <div class="card p-3 shadow-sm">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="mb-0">Recent Active Sessions</h6>
+                            <button class="btn btn-sm btn-link p-0" t-on-click="openSessions">View All</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>IP Address</th>
+                                        <th>Login Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="state.data.active_sessions" t-as="s" t-key="s.id">
+                                        <tr style="cursor: pointer;" t-on-click="() => this.openSessionRecord(s.id)">
+                                            <td><t t-esc="s.user || '—'"/></td>
+                                            <td><t t-esc="s.ip || '—'"/></td>
+                                            <td><t t-esc="s.last_activity"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                    <div class="col-md-6" t-if="state.data.recent_logs">
+                        <div class="card p-3 shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="mb-0">Recent Audit Logs</h6>
+                                <button class="btn btn-sm btn-link p-0" t-on-click="openAuditLogs">View All</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>User</th>
+                                            <th>Action</th>
+                                            <th>Model</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="state.data.recent_logs" t-as="l" t-key="l.id">
+                                            <tr style="cursor: pointer;"
+                                                t-on-click="() => this.openAuditLogRecord(l.id)">
+                                                <td><t t-esc="l.user || '—'"/></td>
+                                                <td><span class="badge bg-secondary"><t t-esc="l.method"/></span></td>
+                                                <td><t t-esc="l.model"/></td>
+                                                <td><t t-esc="l.date"/></td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </t>
+</templates>

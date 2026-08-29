@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Module Category -->
+        <record id="module_category_session_audit" model="ir.module.category">
+            <field name="name">Security and Sentinel (360)</field>
+            <field name="description">User session monitoring and audit logging security management.</field>
+            <field name="sequence">20</field>
+        </record>
+
+        <!-- Odoo 19: res.groups.category_id -> res.groups.privilege_id -->
+        <record id="groups_privilege_session_audit" model="res.groups.privilege">
+            <field name="name">Security and Sentinel (360)</field>
+            <field name="category_id" ref="module_category_session_audit"/>
+        </record>
+
+        <!-- User Group -->
+        <record id="group_session_audit_user" model="res.groups">
+            <field name="name">User</field>
+            <field name="privilege_id" ref="groups_privilege_session_audit"/>
+        </record>
+
+        <!-- Manager Group -->
+        <record id="group_session_audit_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="privilege_id" ref="groups_privilege_session_audit"/>
+            <field name="implied_ids" eval="[(4, ref('group_session_audit_user'))]"/>
+        </record>
+
+        <!-- Odoo 19: Assign Manager group to admin user via res.users -->
+        <record id="base.user_admin" model="res.users">
+            <field name="group_ids" eval="[(4, ref('group_session_audit_manager'))]"/>
+        </record>
+
+        <!-- Implicit Grant to Internal Users -->
+        <record id="base.group_user" model="res.groups">
+            <field name="implied_ids" eval="[(4, ref('group_session_audit_user'))]"/>
+        </record>
+
+        <!-- Record Rules: User Sessions -->
+        <record id="rule_own_session" model="ir.rule">
+            <field name="name">Users: own sessions only</field>
+            <field name="model_id" ref="model_res_users_session"/>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_session_audit_user'))]"/>
+        </record>
+
+        <record id="rule_all_session_manager" model="ir.rule">
+            <field name="name">Managers: all sessions</field>
+            <field name="model_id" ref="model_res_users_session"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('group_session_audit_manager'))]"/>
+        </record>
+
+        <record id="rule_session_multi_company" model="ir.rule">
+            <field name="name">Session: multi-company</field>
+            <field name="model_id" ref="model_res_users_session"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <!-- Record Rules: Audit Logs -->
+        <record id="rule_own_audit_log" model="ir.rule">
+            <field name="name">Users: own audit logs only</field>
+            <field name="model_id" ref="model_audit_log"/>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_session_audit_user'))]"/>
+        </record>
+
+        <record id="rule_all_audit_log_manager" model="ir.rule">
+            <field name="name">Managers: all audit logs</field>
+            <field name="model_id" ref="model_audit_log"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('group_session_audit_manager'))]"/>
+        </record>
+
+        <record id="rule_audit_log_multi_company" model="ir.rule">
+            <field name="name">Audit Log: multi-company</field>
+            <field name="model_id" ref="model_audit_log"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+    </data>
+</odoo>

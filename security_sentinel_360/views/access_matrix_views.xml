@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Client action for the matrix UI -->
+    <record id="action_access_matrix" model="ir.actions.client">
+        <field name="name">User Access Matrix</field>
+        <field name="tag">security_sentinel_360.access_matrix</field>
+    </record>
+
+    <!-- Snapshot views -->
+    <record id="view_access_matrix_snapshot_list" model="ir.ui.view">
+        <field name="name">audit.access.matrix.snapshot.list</field>
+        <field name="model">audit.access.matrix.snapshot</field>
+        <field name="arch" type="xml">
+            <list string="Access Reviews"
+                  decoration-success="review_state == 'approved'"
+                  decoration-danger="review_state == 'rejected'"
+                  decoration-info="review_state == 'reviewing'">
+                <field name="create_date"/>
+                <field name="name"/>
+                <field name="user_count"/>
+                <field name="model_count"/>
+                <field name="admin_count"/>
+                <field name="create_uid"/>
+                <field name="review_state" widget="badge"
+                       decoration-warning="review_state == 'draft'"
+                       decoration-info="review_state == 'reviewing'"
+                       decoration-success="review_state == 'approved'"
+                       decoration-danger="review_state == 'rejected'"/>
+                <field name="reviewed_by_id"/>
+                <field name="reviewed_date"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_access_matrix_snapshot_form" model="ir.ui.view">
+        <field name="name">audit.access.matrix.snapshot.form</field>
+        <field name="model">audit.access.matrix.snapshot</field>
+        <field name="arch" type="xml">
+            <form string="Access Review">
+                <header>
+                    <button name="action_take_snapshot" type="object"
+                            string="Refresh Snapshot" class="btn-secondary"
+                            invisible="review_state in ('approved', 'rejected')"/>
+                    <button name="action_start_review" type="object"
+                            string="Start Review" class="btn-primary"
+                            invisible="review_state != 'draft'"/>
+                    <button name="action_approve" type="object"
+                            string="Approve" class="btn-success"
+                            invisible="review_state != 'reviewing'"/>
+                    <button name="action_reject" type="object"
+                            string="Reject" class="btn-danger"
+                            invisible="review_state != 'reviewing'"/>
+                    <field name="review_state" widget="statusbar"
+                           statusbar_visible="draft,reviewing,approved"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="e.g., Q1 2026 Access Review"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="user_count"/>
+                            <field name="model_count"/>
+                            <field name="admin_count"/>
+                        </group>
+                        <group>
+                            <field name="create_date"/>
+                            <field name="create_uid"/>
+                            <field name="reviewed_by_id" readonly="1"/>
+                            <field name="reviewed_date" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description"
+                                   placeholder="Describe the purpose of this access review..."/>
+                        </page>
+                        <page string="Review Notes">
+                            <field name="review_notes"
+                                   placeholder="Add notes from the review process..."/>
+                        </page>
+                        <page string="Snapshot Data (JSON)">
+                            <field name="snapshot_data" widget="text" readonly="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_access_matrix_snapshot" model="ir.actions.act_window">
+        <field name="name">Access Reviews (Snapshots)</field>
+        <field name="res_model">audit.access.matrix.snapshot</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No access reviews yet</p>
+            <p>Take periodic snapshots of permissions for SOC2/ISO 27001 access review compliance.</p>
+        </field>
+    </record>
+</odoo>
