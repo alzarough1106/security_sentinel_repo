@@ -144,7 +144,7 @@ class ResUsersSession(models.Model):
 
     def _send_new_login_inbox_notification(self):
         """Posts an in-app notification directly to the partner thread and
-        triggers email notification delivery via Odoo 18 mail routing."""
+        triggers email notification delivery via Odoo 19 mail routing."""
         self.ensure_one()
         param = self.env["ir.config_parameter"].sudo().get_param(
             "security_sentinel_360.notify_inbox", "True"

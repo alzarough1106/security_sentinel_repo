@@ -55,11 +55,11 @@ class AuditRule(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         records = super().create(vals_list)
-        # Registry-wide clear (Odoo 18 API). This is intentionally coarse:
+        # Registry-wide clear (Odoo 19 API). This is intentionally coarse:
         # audit.rule writes are rare, admin-only actions, so the small
         # extra invalidation cost across other ormcache-decorated methods
         # is a non-issue in practice, and it matches the pattern used
-        # throughout Odoo 18 core (ir_rule.py, ir_default.py, etc.).
+        # throughout Odoo 19 core (ir_rule.py, ir_default.py, etc.).
         self.env.registry.clear_cache()
         return records
 
