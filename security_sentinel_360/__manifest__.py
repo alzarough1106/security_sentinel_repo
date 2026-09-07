@@ -1,5 +1,5 @@
 {
-    "name": "Odoo Sentinel 360: Access Matrix & Audit Suite",
+    "name": "All In One Access Management, Audit Trail & Session Security",
     "version": "18.0.1.0.0",
     "category": "Extra Tools",
     "summary": "Complete governance suite to track active logins, audit system changes, "
