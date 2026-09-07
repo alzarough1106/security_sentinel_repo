@@ -1,0 +1,54 @@
+<odoo>
+    <record id="view_deletion_password_wizard_form" model="ir.ui.view">
+        <field name="name">deletion.password.wizard.form</field>
+        <field name="model">deletion.password.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="action_type" invisible="1"/>
+                <field name="deletion_request_ids" invisible="1"/>
+                <field name="confirmation_mode" invisible="1"/>
+                <field name="totp_available_for_user" invisible="1"/>
+
+                <group>
+                    <field name="request_count" string="Records Selected" readonly="1"/>
+                    <field name="record_names_preview" readonly="1" nolabel="1"/>
+                </group>
+
+                <div class="alert alert-warning" role="alert" invisible="not has_impact_warning">
+                    <b>⚠ Impact Warning:</b> some selected records are referenced elsewhere.
+                    Deleting them may affect related data:
+                    <field name="combined_impact_summary" readonly="1" nolabel="1"/>
+                </div>
+
+                <div class="alert alert-danger" role="alert" invisible="action_type != 'purge'">
+                    <b>⚠ This is PERMANENT and cannot be undone.</b> The record and its backup
+                    snapshot will be erased immediately, bypassing the normal retention period.
+                </div>
+
+                <group invisible="action_type not in ('confirm', 'purge')">
+                    <p class="text-danger">
+                        Please confirm your identity to proceed.
+                    </p>
+                    <field name="password" password="True" widget="password"
+                           invisible="confirmation_mode == 'totp_optional' and totp_code"/>
+                    <field name="totp_code"
+                           invisible="confirmation_mode == 'password'"
+                           placeholder="6-digit code from your authenticator app"/>
+                    <p class="text-muted" invisible="confirmation_mode != 'totp_optional'">
+                        Enter your password OR a 2FA code - either is accepted.
+                    </p>
+                    <p class="text-danger" invisible="confirmation_mode != 'password_and_totp' or totp_available_for_user">
+                        You must enable 2FA on your account before you can confirm this deletion.
+                    </p>
+                </group>
+                <group invisible="action_type != 'reject'">
+                    <field name="rejection_reason" placeholder="Explain why this deletion request is rejected..."/>
+                </group>
+                <footer>
+                    <button name="action_submit" type="object" string="Confirm" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

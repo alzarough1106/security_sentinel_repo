@@ -1,0 +1,8 @@
+<odoo>
+    <menuitem id="menu_deletion_guard_root" name="Deletion Guard" sequence="95"/>
+    <menuitem id="menu_deletion_request" name="Deletion Requests"
+              parent="menu_deletion_guard_root" action="action_deletion_request" sequence="10"/>
+    <menuitem id="menu_deletion_guard_config" name="Protected Models"
+              parent="menu_deletion_guard_root" action="action_deletion_guard_config" sequence="20"
+              groups="deletion_guard_pro.group_deletion_guard_manager"/>
+</odoo>

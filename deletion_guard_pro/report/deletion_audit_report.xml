@@ -1,0 +1,137 @@
+<odoo>
+    <record id="view_deletion_request_search" model="ir.ui.view">
+        <field name="name">deletion.request.search</field>
+        <field name="model">deletion.request</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="record_display_name"/>
+                <field name="requested_by"/>
+                <field name="confirmed_by"/>
+                <field name="model_id"/>
+                <filter string="Pending" name="pending" domain="[('state','=','pending')]"/>
+                <filter string="Done" name="done" domain="[('state','=','done')]"/>
+                <filter string="Rejected" name="rejected" domain="[('state','=','rejected')]"/>
+                <filter string="In Recycle Bin" name="recyclable"
+                        domain="[('is_recycle_bin','=',True),('restored','=',False),('purged','=',False)]"/>
+                <separator/>
+                <filter string="My Requests" name="my_requests" domain="[('requested_by','=',uid)]"/>
+                <group>
+                    <filter string="Model" name="group_model" context="{'group_by':'model_id'}"/>
+                    <filter string="Status" name="group_state" context="{'group_by':'state'}"/>
+                    <filter string="Requested By" name="group_requester" context="{'group_by':'requested_by'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_deletion_request_list" model="ir.ui.view">
+        <field name="name">deletion.request.list</field>
+        <field name="model">deletion.request</field>
+        <field name="arch" type="xml">
+            <list decoration-danger="state=='rejected'" decoration-success="state=='done'"
+                  decoration-info="state=='pending'" decoration-muted="state=='cancelled'">
+                <field name="name"/>
+                <field name="model_id"/>
+                <field name="record_display_name"/>
+                <field name="requested_by"/>
+                <field name="requested_date"/>
+                <field name="confirmed_by"/>
+                <field name="impact_count" string="Impacted"/>
+                <field name="is_recycle_bin" string="Recoverable"/>
+                <field name="restore_deadline"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_deletion_request_form" model="ir.ui.view">
+        <field name="name">deletion.request.form</field>
+        <field name="model">deletion.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_open_confirm_wizard" type="object" string="Confirm &amp; Delete"
+                            class="btn-danger" invisible="state != 'pending'"/>
+                    <button name="action_open_reject_wizard" type="object" string="Reject"
+                            invisible="state != 'pending' or not requires_approval"/>
+                    <button name="action_cancel" type="object" string="Cancel Request"
+                            invisible="state != 'pending'"/>
+                    <button name="action_restore" type="object" string="Restore"
+                            class="btn-success"
+                            invisible="not is_recycle_bin or restored or purged"/>
+                    <button name="action_open_purge_wizard" type="object" string="Delete Permanently"
+                            class="btn-secondary"
+                            confirm="This will permanently erase this record and its backup. Continue?"
+                            groups="deletion_guard_pro.group_deletion_guard_manager"
+                            invisible="not is_recycle_bin or restored or purged"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="pending,approved,done,restored,rejected"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+
+                    <div class="alert alert-warning" role="alert" invisible="not impact_count">
+                        <b>⚠ Impact Warning:</b>
+                        this record is referenced by other data.
+                        <field name="impact_summary" readonly="1" nolabel="1"/>
+                    </div>
+
+                    <group>
+                        <group string="What">
+                            <field name="model_id" readonly="1"/>
+                            <field name="res_id" readonly="1"/>
+                            <field name="record_display_name" readonly="1"/>
+                            <field name="requires_approval" readonly="1"/>
+                        </group>
+                        <group string="Who / When">
+                            <field name="requested_by" readonly="1"/>
+                            <field name="requested_date" readonly="1"/>
+                            <field name="confirmed_by" readonly="1"/>
+                            <field name="confirmed_date" readonly="1"/>
+                            <field name="self_confirmed" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Reason">
+                        <field name="reason" readonly="1" nolabel="1"/>
+                    </group>
+                    <group string="Rejection Reason" invisible="state != 'rejected'">
+                        <field name="rejection_reason" readonly="1" nolabel="1"/>
+                    </group>
+
+                    <group string="Recycle Bin" invisible="not is_recycle_bin">
+                        <group>
+                            <field name="deletion_method" readonly="1"/>
+                            <field name="restore_deadline" readonly="1"/>
+                            <field name="purged" readonly="1"/>
+                            <field name="purge_date" readonly="1" invisible="not purged"/>
+                        </group>
+                        <group>
+                            <field name="restored" readonly="1"/>
+                            <field name="restored_by" readonly="1" invisible="not restored"/>
+                            <field name="restored_date" readonly="1" invisible="not restored"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Record Snapshot">
+                            <field name="field_snapshot_html" readonly="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_deletion_request" model="ir.actions.act_window">
+        <field name="name">Deletion Requests</field>
+        <field name="res_model">deletion.request</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_pending': 1}</field>
+    </record>
+</odoo>

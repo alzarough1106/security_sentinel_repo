@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="deletion_guard_pro.Dashboard">
+        <div class="o_deletion_guard_dashboard p-4 h-100 overflow-auto o_scrollable">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2>Deletion Guard Dashboard</h2>
+                <button class="btn btn-primary" t-on-click="refresh">
+                    <i class="fa fa-refresh mr-1"/> Refresh
+                </button>
+            </div>
+
+            <t t-if="state.loading">
+                <p>Loading...</p>
+            </t>
+            <t t-else="">
+                <div class="row g-3 mb-3">
+                    <div class="col-md-3">
+                        <div class="dg-kpi-card dg-kpi-teal" t-on-click="openAll">
+                            <div class="dg-kpi-label">Total Requests</div>
+                            <div class="dg-kpi-value" t-esc="state.data.kpis.total_requests"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="dg-kpi-card dg-kpi-orange" t-on-click="openPending">
+                            <div class="dg-kpi-label">Pending</div>
+                            <div class="dg-kpi-value" t-esc="state.data.kpis.total_pending"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="dg-kpi-card dg-kpi-red" t-on-click="openRejected">
+                            <div class="dg-kpi-label">Rejected</div>
+                            <div class="dg-kpi-value" t-esc="state.data.kpis.total_rejected"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="dg-kpi-card dg-kpi-green" t-on-click="openRecycleBin">
+                            <div class="dg-kpi-label">In Recycle Bin</div>
+                            <div class="dg-kpi-value" t-esc="state.data.kpis.in_recycle_bin"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-3">
+                        <div class="dg-kpi-card dg-kpi-grey">
+                            <div class="dg-kpi-label">Completed</div>
+                            <div class="dg-kpi-value" t-esc="state.data.kpis.total_done"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="dg-kpi-card dg-kpi-grey">
+                            <div class="dg-kpi-label">Cancelled</div>
+                            <div class="dg-kpi-value" t-esc="state.data.kpis.total_cancelled"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="dg-kpi-card dg-kpi-purple">
+                            <div class="dg-kpi-label">Rejection Rate</div>
+                            <div class="dg-kpi-value">
+                                <t t-esc="state.data.kpis.rejection_rate"/>%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-8">
+                        <div class="dg-panel">
+                            <h5>Activity Trend (14 days)</h5>
+                            <div class="dg-chart-container">
+                                <canvas t-ref="trendChart"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="dg-panel">
+                            <h5>Requests by State</h5>
+                            <div class="dg-chart-container">
+                                <canvas t-ref="stateChart"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <div class="dg-panel">
+                            <h5>Top Requesters</h5>
+                            <div class="dg-chart-container">
+                                <canvas t-ref="requesterChart"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="dg-panel">
+                            <h5>Top Protected Models</h5>
+                            <div class="dg-chart-container">
+                                <canvas t-ref="modelChart"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-12">
+                        <div class="dg-panel">
+                            <h5>Deletion Heatmap (last 14 days x top models)</h5>
+                            <table class="dg-heatmap-table">
+                                <thead>
+                                    <tr>
+                                        <th/>
+                                        <t t-foreach="state.data.heatmap.model_labels" t-as="m" t-key="m">
+                                            <th t-esc="m"/>
+                                        </t>
+                                    </tr>
+                                </thead>
+                                    <tbody>
+                                        <t t-foreach="state.data.heatmap.matrix" t-as="row" t-key="row_index">
+                                            <tr>
+                                                <td class="dg-heatmap-day">
+                                                    <t t-esc="state.data.heatmap.day_labels[row_index]"/>
+                                                </td>
+                                                <t t-foreach="row" t-as="cell" t-key="cell_index">
+                                                    <td t-attf-style="{{cellStyle(cell, maxInMatrix(state.data.heatmap.matrix))}}"
+                                                        t-on-click="() => this.onHeatmapCellClick(row_index, cell_index)">
+                                                        <t t-esc="cell"/>
+                                                    </td>
+                                                </t>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>
