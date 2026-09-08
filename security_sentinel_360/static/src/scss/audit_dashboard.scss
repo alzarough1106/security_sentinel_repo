@@ -1,0 +1,99 @@
+.o_audit_dashboard {
+    /* base KPI Card Styling */
+    .o_kpi_card {
+        border-radius: 8px;
+        padding: 14px 16px;
+        height: 100%;
+        color: #111827;
+        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 2px 5px rgba(0, 0, 0, 0.05);
+        transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+
+        .o_kpi_label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+
+        /* Black Value Color across all KPI cards */
+        .o_kpi_value {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: #000000 !important;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+        }
+
+        /* Interactive Light Hover / Focus State */
+        &.o_kpi_clickable {
+            cursor: pointer;
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.9), 0 6px 12px rgba(0, 0, 0, 0.12);
+                filter: brightness(1.04);
+            }
+        }
+    }
+
+    /* Metallic Light Themes */
+    .bg-metallic-light-green {
+        background: linear-gradient(135deg, #f0f7f1 0%, #cde5d2 45%, #b2d8bb 55%, #e1f0e4 100%);
+        border: 1px solid #9bbd9e !important;
+        .o_kpi_label { color: #1e3a24; }
+    }
+
+    .bg-metallic-light-red {
+        background: linear-gradient(135deg, #fdf2f2 0%, #f8d7da 45%, #f1b0b7 55%, #fbf0f0 100%);
+        border: 1px solid #e6a5ad !important;
+        .o_kpi_label { color: #4a151b; }
+    }
+
+    .bg-metallic-light-yellow {
+        background: linear-gradient(135deg, #fefce8 0%, #fef08a 45%, #fde047 55%, #fef9c3 100%);
+        border: 1px solid #eab308 !important;
+        .o_kpi_label { color: #583d00; }
+    }
+
+    .bg-metallic-light-cyan {
+        background: linear-gradient(135deg, #f0f9ff 0%, #bae6fd 45%, #7dd3fc 55%, #e0f2fe 100%);
+        border: 1px solid #7dd3fc !important;
+        .o_kpi_label { color: #0c4a6e; }
+    }
+
+    .bg-metallic-light-blue {
+        background: linear-gradient(135deg, #eff6ff 0%, #bfdbfe 45%, #93c5fd 55%, #dbeafe 100%);
+        border: 1px solid #93c5fd !important;
+        .o_kpi_label { color: #1e3a8a; }
+    }
+
+    .bg-metallic-light-slate {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 45%, #cbd5e1 55%, #f1f5f9 100%);
+        border: 1px solid #cbd5e1 !important;
+        .o_kpi_label { color: #334155; }
+    }
+
+    /* Cards & Lists Containers */
+    .o_chart_card, .o_list_card {
+        background: #fff;
+        border: 1px solid #e5e5e5;
+        border-radius: 8px;
+        padding: 12px 16px;
+        height: 100%;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+
+    .o_chart_wrap {
+        position: relative;
+        height: 260px;
+    }
+
+    table tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    .o_clickable_row {
+        cursor: pointer;
+        &:hover {
+            background-color: #f1f3f5;
+        }
+    }
+}

@@ -1,0 +1,131 @@
+<odoo>
+    <record id="view_user_session_list" model="ir.ui.view">
+        <field name="name">res.users.session.list</field>
+        <field name="model">res.users.session</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="state=='killed'" decoration-success="state=='active'">
+                <field name="user_id"/>
+                <field name="ip_address"/>
+                <field name="browser"/>
+                <field name="operating_system"/>
+                <field name="device_type"/>
+                <field name="login_date"/>
+                <field name="last_activity"/>
+                <field name="state"/>
+                <field name="is_new_device"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_user_session_form" model="ir.ui.view">
+        <field name="name">res.users.session.form</field>
+        <field name="model">res.users.session</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_kill_session" type="object" string="Kill Session"
+                            class="btn-danger" attrs="{'invisible': [('state', '!=', 'active')]}"
+                            confirm="Are you sure? If this is your current session, you will be logged out immediately."/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="user_id"/>
+                            <field name="ip_address" string="IP"/>
+                            <field name="browser"/>
+                            <field name="browser_version"/>
+<!--                            <field name="session_token" string="Session ID"/>-->
+                        </group>
+                        <group>
+                            <field name="device_type" string="Device"/>
+                            <field name="operating_system" string="OS"/>
+                            <field name="state"/>
+                            <field name="login_date"/>
+                            <field name="last_activity"/>
+                            <field name="logout_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Activity Log">
+                            <field name="audit_log_ids" nolabel="1">
+                                <tree>
+                                    <field name="model_name" string="Model"/>
+                                    <field name="record_name" string="Record Name"/>
+                                    <field name="create_date" string="Date"/>
+                                    <field name="method" string="Action Performed"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_user_session_kanban" model="ir.ui.view">
+        <field name="name">res.users.session.kanban</field>
+        <field name="model">res.users.session</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="user_id"/>
+                <field name="ip_address"/>
+                <field name="browser"/>
+                <field name="operating_system"/>
+                <field name="device_type"/>
+                <field name="state"/>
+                <field name="login_date"/>
+                <field name="last_activity"/>
+                <field name="is_new_device"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click o_session_card border-start border-4
+            #{record.state.raw_value == 'active' ? 'border-success' :
+              record.state.raw_value == 'killed' ? 'border-danger' : 'border-secondary'}">
+                            <div class="d-flex justify-content-between">
+                                <strong>
+                                    <field name="user_id"/>
+                                </strong>
+                                <span t-attf-class="badge #{record.state.raw_value == 'active' ? 'bg-success' :
+                    record.state.raw_value == 'killed' ? 'bg-danger' : 'bg-secondary'}">
+                                    <field name="state"/>
+                                </span>
+                            </div>
+                            <div class="text-muted small mt-1">
+                                <i class="fa fa-desktop" title="Device"/>
+                                <field name="device_type"/>
+                                &#8226;
+                                <field name="browser"/>
+                                &#8226;
+                                <field name="operating_system"/>
+                            </div>
+                            <div class="text-muted small">
+                                <i class="fa fa-map-marker" title="IP Address"/>
+                                <field name="ip_address"/>
+                            </div>
+                            <div class="small mt-1">
+                                Last activity:
+                                <field name="last_activity"/>
+                            </div>
+                            <span t-if="record.is_new_device.raw_value" class="badge bg-warning mt-1">
+                                New Device
+                            </span>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_user_session" model="ir.actions.act_window">
+        <field name="name">Sessions</field>
+        <field name="res_model">res.users.session</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id" ref="view_user_session_search"/>
+        <field name="context">{'search_default_state_active': 1}</field>
+    </record>
+</odoo>
