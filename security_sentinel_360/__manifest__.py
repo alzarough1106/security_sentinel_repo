@@ -34,6 +34,7 @@
     ],
     "assets": {
         "web.assets_backend": [
+            "web/static/lib/Chart/Chart.js",
             "security_sentinel_360/static/src/js/audit_dashboard.js",
             "security_sentinel_360/static/src/xml/audit_dashboard.xml",
             "security_sentinel_360/static/src/scss/audit_dashboard.scss",
