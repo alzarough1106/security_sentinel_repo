@@ -42,6 +42,7 @@
             "security_sentinel_360/static/src/scss/access_matrix.scss",
         ],
         "web.assets_frontend": [
+            "web/static/lib/Chart/Chart.js",
             "security_sentinel_360/static/src/css/faq_accordion.css",
             "security_sentinel_360/static/src/js/faq_accordion.js",
         ],
