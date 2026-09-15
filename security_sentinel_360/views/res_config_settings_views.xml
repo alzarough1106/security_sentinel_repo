@@ -1,0 +1,70 @@
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.super.session.audit</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" string="Security &amp; Sentinel(360)" data-string="Security &amp; Sentinel(360)" data-key="security_sentinel_360">
+
+                    <h2>Session Management</h2>
+                    <div class="row mt16 o_settings_container" name="session_timeout_setting_container">
+                        <div class="col-12 col-lg-6 o_setting_box" id="session_timeout_setting">
+                            <div class="o_setting_right_pane">
+                                <label for="session_idle_timeout_minutes"/>
+                                <div class="text-muted">
+                                    Sessions inactive longer than this are automatically killed.
+                                </div>
+                                <div class="content-group mt16">
+                                    <field name="session_idle_timeout_minutes"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2>Audit Log</h2>
+                    <div class="row mt16 o_settings_container" name="audit_log_setting_container">
+                        <div class="col-12 col-lg-6 o_setting_box" id="audit_log_setting">
+                            <div class="o_setting_right_pane">
+                                <label for="audit_log_retention_days"/>
+                                <div class="text-muted">
+                                    Logs older than this are purged automatically (0 = keep forever).
+                                </div>
+                                <div class="content-group mt16">
+                                    <field name="audit_log_retention_days"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2>New Login Notifications</h2>
+                    <div class="row mt16 o_settings_container" name="new_login_notifications_container">
+                        <div class="col-12 col-lg-6 o_setting_box" id="notify_new_login_email_setting">
+                            <div class="o_setting_left_pane">
+                                <field name="notify_new_login_email"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="notify_new_login_email"/>
+                                <div class="text-muted">
+                                    Send an email when a user logs in from a new device or a never-seen-before IP address.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="notify_new_login_inbox_setting">
+                            <div class="o_setting_left_pane">
+                                <field name="notify_new_login_inbox"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="notify_new_login_inbox"/>
+                                <div class="text-muted">
+                                    Show an in-app Inbox/bell notification for the same event.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

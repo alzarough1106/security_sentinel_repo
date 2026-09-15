@@ -1,0 +1,47 @@
+<odoo>
+    <record id="view_audit_log_search" model="ir.ui.view">
+        <field name="name">audit.log.search</field>
+        <field name="model">audit.log</field>
+        <field name="arch" type="xml">
+            <search string="Search Audit Logs">
+                <field name="user_id" string="User"/>
+                <field name="model_name" string="Model"/>
+                <field name="record_name" string="Record"/>
+                <field name="session_id" string="Session"/>
+                <field name="ip_address" string="IP Address"/>
+
+                <filter string="My Activity" name="my_activity"
+                        domain="[('user_id', '=', uid)]"/>
+                <separator/>
+                <filter string="Created" name="method_create"
+                        domain="[('method', '=', 'create')]"/>
+                <filter string="Updated" name="method_write"
+                        domain="[('method', '=', 'write')]"/>
+                <filter string="Deleted" name="method_unlink"
+                        domain="[('method', '=', 'unlink')]"/>
+                <filter string="Read" name="method_read"
+                        domain="[('method', '=', 'read')]"/>
+                <filter string="Module Install/Uninstall" name="method_module"
+                        domain="[('method', 'in', ['module_install', 'module_uninstall'])]"/>
+                <separator/>
+                <filter string="Today" name="today"
+                        domain="[('create_date', '&gt;=', context_today().strftime('%Y-%m-%d 00:00:00'))]"/>
+                <filter string="Last 7 Days" name="last_7d"
+                        domain="[('create_date', '&gt;=', (context_today() - relativedelta(days=7)).strftime('%Y-%m-%d 00:00:00'))]"/>
+                <filter string="Last 30 Days" name="last_30d"
+                        domain="[('create_date', '&gt;=', (context_today() - relativedelta(days=30)).strftime('%Y-%m-%d 00:00:00'))]"/>
+
+                <group expand="0" string="Group By">
+                    <filter string="User" name="group_user" context="{'group_by': 'user_id'}"/>
+                    <filter string="Model" name="group_model" context="{'group_by': 'model_name'}"/>
+                    <filter string="Action" name="group_method" context="{'group_by': 'method'}"/>
+                    <filter string="Session" name="group_session" context="{'group_by': 'session_id'}"/>
+                    <separator/>
+                    <filter string="Date (Day)" name="group_date_day" context="{'group_by': 'create_date:day'}"/>
+                    <filter string="Date (Week)" name="group_date_week" context="{'group_by': 'create_date:week'}"/>
+                    <filter string="Date (Month)" name="group_date_month" context="{'group_by': 'create_date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

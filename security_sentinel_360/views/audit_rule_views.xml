@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- List/Tree View -->
+    <record id="view_audit_rule_list" model="ir.ui.view">
+        <field name="name">audit.rule.list</field>
+        <field name="model">audit.rule</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="model_id" width="220px"/>
+                <field name="log_create" width="90px"/>
+                <field name="log_write" width="90px"/>
+                <field name="log_unlink" width="90px"/>
+                <field name="log_read" width="90px"/>
+                <field name="is_recommended" string="Recommended Default" widget="boolean_toggle" readonly="1" width="160px"/>
+                <field name="note" width="250px"/>
+                <field name="active" width="80px"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_audit_rule_form" model="ir.ui.view">
+        <field name="name">audit.rule.form</field>
+        <field name="model">audit.rule</field>
+        <field name="arch" type="xml">
+            <form string="Override tracking (Audit Rule)">
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <group>
+                        <group string="General Configuration">
+                            <field name="model_id"/>
+                            <field name="is_recommended" string="Recommended Default" widget="boolean_toggle" readonly="1"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                        <group string="Logged Operations">
+                            <field name="log_create"/>
+                            <field name="log_write"/>
+                            <field name="log_unlink"/>
+                            <field name="log_read"/>
+                        </group>
+                    </group>
+                    <group string="Notes">
+                        <field name="note" nolabel="1" placeholder="Add contextual notes or explanation for this audit rule..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_audit_rule_search" model="ir.ui.view">
+        <field name="name">audit.rule.search</field>
+        <field name="model">audit.rule</field>
+        <field name="arch" type="xml">
+            <search string="Search Audit Rules">
+                <field name="model_id"/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Model" name="group_by_model" context="{'group_by': 'model_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_audit_rule" model="ir.actions.act_window">
+        <field name="name">Override tracking (Audit Rule)</field>
+        <field name="res_model">audit.rule</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_audit_rule_search"/>
+    </record>
+
+    <!-- Server Action -->
+    <record id="action_sync_recommended_rules" model="ir.actions.server">
+        <field name="name">Sync Recommended Rules</field>
+        <field name="model_id" ref="model_audit_rule"/>
+        <field name="binding_model_id" ref="model_audit_rule"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">action = model._sync_recommended_rules()</field>
+    </record>
+</odoo>

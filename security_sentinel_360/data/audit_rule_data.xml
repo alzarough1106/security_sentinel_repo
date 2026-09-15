@@ -1,0 +1,3 @@
+<odoo>
+    <function model="audit.rule" name="_sync_recommended_rules"/>
+</odoo>
