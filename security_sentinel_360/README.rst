@@ -1,4 +1,4 @@
-🛡️ Odoo Sentinel 360: Access Matrix, Session Security & Audit Trail — Odoo 16
+🛡️ Odoo Sentinel 360: Access Matrix, Session Security & Audit Trail — Odoo 15
 Track every login session, audit every record change, and map every user permission across your entire Odoo database — with an interactive Access Right Matrix and real-time security dashboard.
 
 Features
