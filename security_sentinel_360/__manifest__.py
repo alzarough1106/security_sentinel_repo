@@ -6,7 +6,7 @@
                "and analyze user permissions via an Access Right Matrix",
     "author": "alzarough",
     "license": "OPL-1",
-    "price": 50.0,
+    "price": 20.0,
     "currency": "USD",
     "depends": ["base", "mail", "web"],
     "data": [
